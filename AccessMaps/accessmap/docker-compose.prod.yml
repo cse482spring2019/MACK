@@ -1,0 +1,31 @@
+version: '3.2'
+
+services:
+  api:
+    build:
+      context: https://github.com/accessmap/accessmap-api.git#v1.0
+    restart: always
+    environment:
+      - SECRET_KEY=$PROD_API_SECRET
+      - JWT_SECRET_KEY=$PROD_JWT_SECRET_KEY
+      - SQLALCHEMY_DATABASE_URI=$PROD_API_DATABASE_URI
+      - OSM_URI=https://api.openstreetmap.org
+      - CONSUMER_CALLBACK_URI=${PROD_CONSUMER_CALLBACK_URI:-$PROD_HOST/login_callback}
+      - OSM_CLIENT_ID=$PROD_OSM_CLIENT_ID
+      - OSM_CLIENT_SECRET=$PROD_OSM_CLIENT_SECRET
+
+  router:
+    restart: always
+
+  caddy:
+    restart: always
+    volumes:
+      - ./config/caddy/Caddyfile.tls.prod:/etc/Caddyfile.tls
+      - /docker/.caddy:/root/.caddy
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - ANALYTICS_URL=$PROD_ANALYTICS_URL
+      - HOST=${PROD_HOST}
+      - ACME_AGREE=true
