@@ -3,12 +3,15 @@
 ## Installation
 
 Make sure your `.env` has been set properly in MACK/accessmap-webapp
-`HOST=localhost:3000
+
+```bash
+HOST=localhost:3000
 DEV_OSM_CLIENT_ID=hCY572WCfysbu7bD19QidqR6Y4SjrR2rlk1TR9e4
 DEV_OSM_CLIENT_SECRET=OQV2i2jCOCsIFq8agWIIIifJCjyac52mImJJvHsx
 MAPBOX_TOKEN=pk.eyJ1Ijoia2VuZG9uZyIsImEiOiJjanZmcXMyc2EyeDU3NDRtZTFqYWpra3IwIn0.ncnJGf_a4F1VbtJUVzlmew
 
-ANALYTICS=no`
+ANALYTICS=no
+```
 
 Do the docker-compose in the Orchestration directory, then:
 
