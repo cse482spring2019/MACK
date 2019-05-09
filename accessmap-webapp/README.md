@@ -5,7 +5,7 @@
 Do the docker-compose in the Orchestration directory, then:
 
 run `npm install` in the accessmap-webapp directory
-run `npm build` in the same directory
+run `npm run build` in the same directory
 run `npm start` in the same directory
 in the case of package dependencies, use `npm audit fix` to install the packages needed
 
