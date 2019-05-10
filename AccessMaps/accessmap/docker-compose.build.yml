@@ -1,4 +1,4 @@
-version: '3.2'
+version: "3.2"
 
 services:
   # Build routing graph
@@ -22,6 +22,7 @@ services:
       - ./build/tiles:/home/tippecanoe/output:rw
 
   # Build webapp into static assets
+  # TODO: change context so it points to our modified webapp
   webapp:
     build:
       context: https://github.com/accessmap/accessmap-webapp.git#develop
