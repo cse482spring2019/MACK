@@ -22,7 +22,6 @@ services:
       - ./build/tiles:/home/tippecanoe/output:rw
 
   # Build webapp into static assets
-  # TODO: change context so it points to our modified webapp
   webapp:
     build:
       context: https://github.com/kdong/accessmap-webapp.git#develop
