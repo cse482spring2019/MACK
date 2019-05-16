@@ -29,10 +29,12 @@
   }
 
   .route-bottom-card--button {
-    width: 50%;
+    width: 30%;
   }
 
-  .route-bottom-card--button + .route-bottom-card--button {
+  .route-bottom-card--button
+    + .route-bottom-card--button
+    + .route-bottom-card--button {
     margin-left: 8px;
   }
 }

@@ -24,7 +24,8 @@ services:
   # Build webapp into static assets
   webapp:
     build:
-      context: https://github.com/kdong/accessmap-webapp.git#develop
+      context: ../webapp
+      # https://github.com/kdong/accessmap-webapp.git#develop
     command: npm run build
     volumes:
       - ./data/regions.geojson:/www/public/regions.json:ro
