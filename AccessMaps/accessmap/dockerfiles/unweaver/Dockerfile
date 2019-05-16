@@ -14,7 +14,9 @@ RUN mkdir -p /install
 WORKDIR /install
 
 # TODO: don't use poetry? It's a bit hacky
-RUN git clone https://github.com/nbolten/unweaver.git unweaver
+#RUN git clone https://github.com/nbolten/unweaver.git unweaver
+
+ADD ./unweaver /install/unweaver
 
 WORKDIR /install/unweaver
 
