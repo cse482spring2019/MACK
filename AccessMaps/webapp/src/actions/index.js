@@ -295,24 +295,6 @@ export const closeMapInfo = () => ({
   }
 });
 
-export const viewAlternateRoute = routeResult => ({
-  type: VIEW_ALTERNATE_ROUTE,
-  meta: {
-    analytics: {
-      type: "view-alternate-route"
-    }
-  }
-});
-
-export const closeAlternateRoute = routeResult => ({
-  type: CLOSE_ALTERNATE_ROUTE,
-  meta: {
-    analytics: {
-      type: "close-alternate-route"
-    }
-  }
-});
-
 export const requestRoute = (origin, destination, type, params) => ({
   type: REQUEST_ROUTE,
   payload: {
@@ -809,6 +791,26 @@ export const viewDirections = routeResult => ({
   meta: {
     analytics: {
       type: "view-directions"
+    }
+  }
+});
+
+export const viewAlternateRoute = routeResult => ({
+  type: VIEW_ALTERNATE_ROUTE,
+  payload: routeResult,
+  meta: {
+    analytics: {
+      type: "view-alternate-route"
+    }
+  }
+});
+
+export const closeAlternateRoute = routeResult => ({
+  type: CLOSE_ALTERNATE_ROUTE,
+  payload: routeResult,
+  meta: {
+    analytics: {
+      type: "close-alternate-route"
     }
   }
 });

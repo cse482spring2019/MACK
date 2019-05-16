@@ -6,6 +6,7 @@ import {
   CLOSE_DIRECTIONS,
   CLOSE_REGION_SELECTIONS,
   CLOSE_SIGNUP_PROMPT,
+  CLOSE_ALTERNATE_ROUTE,
   HIDE_DRAWER,
   OPEN_REGION_SELECTIONS,
   OPEN_SIGNUP_PROMPT,
@@ -16,7 +17,8 @@ import {
   TOGGLE_SETTING_PROFILE,
   VIEW_DIRECTIONS,
   VIEW_MAP_INFO,
-  VIEW_ROUTE_INFO
+  VIEW_ROUTE_INFO,
+  VIEW_ALTERNATE_ROUTE
 } from "actions";
 
 import { defaultActivities as defaults } from "reducers/defaults";
@@ -115,6 +117,17 @@ const handleViewingRouteInfo = (state = defaults.viewingRouteInfo, action) => {
   }
 };
 
+const handleViewingAlternate = (state = defaults.viewingAlternate, action) => {
+  switch (action.type) {
+    case VIEW_ALTERNATE_ROUTE:
+      return true;
+    case CLOSE_ALTERNATE_ROUTE:
+      return false;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   drawerVisible: handleDrawerVisible,
   promptingSignup: handlePromptingSignup,
@@ -123,5 +136,6 @@ export default combineReducers({
   viewingDirections: handleViewingDirections,
   viewingMapInfo: handleViewingMapInfo,
   viewingRoute: handleViewingRoute,
-  viewingRouteInfo: handleViewingRouteInfo
+  viewingRouteInfo: handleViewingRouteInfo,
+  viewingAlternate: handleViewingAlternate
 });

@@ -18,11 +18,12 @@ const RouteBottomCard = props => {
     routeResult,
     viewingDirections,
     viewingRoute,
-    viewingRouteInfo
+    viewingRouteInfo,
+    viewingAlternate
   } = props;
 
   if (!viewingRoute) return null;
-  if (viewingDirections || viewingRouteInfo) return null;
+  if (viewingDirections || viewingRouteInfo || viewingAlternate) return null;
   if (!routeResult) return null;
   if (routeResult.code !== "Ok") return null;
 
@@ -76,21 +77,24 @@ RouteBottomCard.propTypes = {
   routeResult: routeResultProps,
   viewingDirections: PropTypes.bool,
   viewingRoute: PropTypes.bool,
-  viewingRouteInfo: PropTypes.bool
+  viewingRouteInfo: PropTypes.bool,
+  viewingAlternate: PropTypes.bool
 };
 
 RouteBottomCard.defaultProps = {
   routeResult: null,
   viewingRoute: false,
   viewingDirections: false,
-  viewingRouteInfo: false
+  viewingRouteInfo: false,
+  viewingAlternate: false
 };
 
 const mapStateToProps = state => ({
   routeResult: state.route.routeResult,
   viewingDirections: state.activities.viewingDirections,
   viewingRoute: state.activities.viewingRoute,
-  viewingRouteInfo: state.activities.viewingRouteInfo
+  viewingRouteInfo: state.activities.viewingRouteInfo,
+  viewingAlternate: state.activities.viewingAlternate
 });
 
 const mapDispatchToProps = dispatch => ({
