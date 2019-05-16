@@ -64,7 +64,7 @@ const RouteBottomCard = props => {
           primary
           onClick={() => actions.viewDirections(routeResult)}
         >
-          Reroute
+          Alternate Route
         </Button>
       </CardActions>
     </Card>
