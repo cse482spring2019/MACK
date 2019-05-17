@@ -54,7 +54,7 @@ const getFeatureType = properties => {
 };
 
 const FeatureCard = props => {
-  const { actions, selectedFeature } = props;
+  const { actions, selectedFeature, viewingAlternate } = props;
 
   if (!selectedFeature) return null;
   if (!selectedFeature.properties) selectedFeature.properties = {};
@@ -142,40 +142,61 @@ const FeatureCard = props => {
           ) : null}
         </TableBody>
       </DataTable>
-      <CardActions>
-        <Button
-          flat
-          primary
-          onClick={() => {
-            actions.setOrigin(
-              selectedFeature.location[0],
-              selectedFeature.location[1],
-              [
-                selectedFeature.location[1].toFixed(6),
-                selectedFeature.location[0].toFixed(6)
-              ].join(", ")
-            );
-          }}
-        >
-          Route from here
-        </Button>
-        <Button
-          flat
-          primary
-          onClick={() => {
-            actions.setDestination(
-              selectedFeature.location[0],
-              selectedFeature.location[1],
-              [
-                selectedFeature.location[1].toFixed(6),
-                selectedFeature.location[0].toFixed(6)
-              ].join(", ")
-            );
-          }}
-        >
-          Route to here
-        </Button>
-      </CardActions>
+      {viewingAlternate ? (
+        <CardActions>
+          <Button
+            flat
+            primary
+            onClick={() => {
+              actions.setOrigin(
+                selectedFeature.location[0],
+                selectedFeature.location[1],
+                [
+                  selectedFeature.location[1].toFixed(6),
+                  selectedFeature.location[0].toFixed(6)
+                ].join(", ")
+              );
+            }}
+          >
+            Report Obstacle Here
+          </Button>
+        </CardActions>
+      ) : (
+        <CardActions>
+          <Button
+            flat
+            primary
+            onClick={() => {
+              actions.setOrigin(
+                selectedFeature.location[0],
+                selectedFeature.location[1],
+                [
+                  selectedFeature.location[1].toFixed(6),
+                  selectedFeature.location[0].toFixed(6)
+                ].join(", ")
+              );
+            }}
+          >
+            Route from here
+          </Button>
+          <Button
+            flat
+            primary
+            onClick={() => {
+              actions.setDestination(
+                selectedFeature.location[0],
+                selectedFeature.location[1],
+                [
+                  selectedFeature.location[1].toFixed(6),
+                  selectedFeature.location[0].toFixed(6)
+                ].join(", ")
+              );
+            }}
+          >
+            Route to here
+          </Button>
+        </CardActions>
+      )}
     </Card>
   );
 };
@@ -187,13 +208,15 @@ FeatureCard.propTypes = {
     layerName: PropTypes.string,
     location: PropTypes.arrayOf(PropTypes.number),
     properties: PropTypes.object
-  })
+  }),
+  viewingAlternate: PropTypes.bool
 };
 
-FeatureCard.defaultProps = { selectedFeature: null };
+FeatureCard.defaultProps = { selectedFeature: null, viewingAlternate: false };
 
 const mapStateToProps = state => ({
-  selectedFeature: state.map.selectedFeature
+  selectedFeature: state.map.selectedFeature,
+  viewingAlternate: state.activities.viewingAlternate
 });
 
 const mapDispatchToProps = dispatch => ({
