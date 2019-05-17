@@ -26,6 +26,7 @@ export const CLOSE_REGION_SELECTIONS = "CLOSE_REGION_SELECTIONS";
 
 // Alternate route stuff
 export const VIEW_ALTERNATE_ROUTE = "VIEW_ALTERNATE_ROUTE";
+export const FETCH_ALTERNATE_ROUTE = "FETCH_ALTERNATE_ROUTE";
 
 // Routing profile settings
 export const SET_SPEED = "SET_SPEED";
