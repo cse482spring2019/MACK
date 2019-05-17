@@ -26,11 +26,9 @@ const AlternateRoute = props => {
         ]}
       />
       <Card>
-        <CardText>
-          <h2>
-            If you want to request a rereoute, please tap the location of the
-            obstruction on the map.
-          </h2>
+        <CardText className="directions--step">
+          If you want to request a rereoute, please tap the location of the
+          obstruction on the map.
         </CardText>
       </Card>
     </React.Fragment>

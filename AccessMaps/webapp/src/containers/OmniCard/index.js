@@ -102,7 +102,7 @@ class OmniCard extends React.PureComponent {
 
     if (!isMobile && viewingAlternate) {
       return (
-        <Card className="omnicard">
+        <Card className="omnicard alternate--mode">
           <AlternateRoute
             onClose={() => actions.closeDirections(routeResult)}
             routeResult={routeResult}
