@@ -27,6 +27,7 @@ export const CLOSE_REGION_SELECTIONS = "CLOSE_REGION_SELECTIONS";
 // Alternate route stuff
 export const VIEW_ALTERNATE_ROUTE = "VIEW_ALTERNATE_ROUTE";
 export const FETCH_ALTERNATE_ROUTE = "FETCH_ALTERNATE_ROUTE";
+export const SET_OBSTACLE = "SET_OBSTACLE";
 
 // Routing profile settings
 export const SET_SPEED = "SET_SPEED";
@@ -651,6 +652,21 @@ export const setOrigin = (lon, lat, name) => (dispatch, getState) => {
     meta: {
       analytics: {
         type: "set-origin",
+        payload: { lon, lat, name }
+      }
+    }
+  });
+
+  routeIfValid(dispatch, getState);
+};
+
+export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
+  dispatch({
+    type: SET_OBSTACLE,
+    payload: { lon, lat, name },
+    meta: {
+      analytics: {
+        type: "set-obstacle",
         payload: { lon, lat, name }
       }
     }

@@ -6,7 +6,8 @@ import {
   LOG_OUT,
   RECEIVE_ROUTE,
   SAVE_PROFILE_SUCCESS,
-  SAVE_PROFILE_FAILURE
+  SAVE_PROFILE_FAILURE,
+  VIEW_ALTERNATE_ROUTE
 } from "actions";
 
 import { defaultToasts as defaults } from "reducers/defaults";
@@ -61,6 +62,9 @@ export default (state = defaults, action) => {
         default:
           return toasts;
       }
+    case VIEW_ALTERNATE_ROUTE:
+      toasts.push("rerouting...");
+      return toasts;
     default:
       return state;
   }

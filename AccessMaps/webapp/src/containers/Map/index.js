@@ -90,6 +90,7 @@ class Map extends Component {
       lat,
       mediaType,
       viewingDirections,
+      viewingAlternate,
       zoom,
       ...props
     } = this.props;
@@ -175,6 +176,7 @@ Map.propTypes = {
   lat: PropTypes.number,
   mediaType: PropTypes.oneOf(["mobile", "tablet", "desktop"]),
   viewingDirections: PropTypes.bool,
+  viewingAlternate: PropTypes.bool,
   zoom: PropTypes.number
 };
 
@@ -183,6 +185,7 @@ Map.defaultProps = {
   lat: regions.features[0].properties.lat,
   mediaType: "mobile",
   viewingDirections: false,
+  viewingAlternate: false,
   zoom: regions.features[0].properties.zoom
 };
 
@@ -196,6 +199,7 @@ const mapStateToProps = state => {
     lat,
     mediaType: browser.mediaType,
     viewingDirections: activities.viewingDirections,
+    viewingAlternate: activities.viewingAlternate,
     zoom: z
   };
 };

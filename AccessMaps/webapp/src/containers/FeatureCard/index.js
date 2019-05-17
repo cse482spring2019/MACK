@@ -148,7 +148,7 @@ const FeatureCard = props => {
             flat
             primary
             onClick={() => {
-              actions.setOrigin(
+              actions.setObstacle(
                 selectedFeature.location[0],
                 selectedFeature.location[1],
                 [
