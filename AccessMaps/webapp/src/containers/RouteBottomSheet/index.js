@@ -10,6 +10,7 @@ import Card from "react-md/src/js/Cards";
 
 import Directions from "components/Directions";
 import RouteInfo from "components/RouteInfo";
+import AlternateRoute from "components/AlternateRoute";
 
 import { routeResult as routeResultProps } from "prop-schema";
 
@@ -19,16 +20,18 @@ const RouteBottomSheet = props => {
     mediaType,
     routeResult,
     viewingDirections,
-    viewingRouteInfo
+    viewingRouteInfo,
+    viewingAlternate
   } = props;
 
-  if (!viewingDirections && !viewingRouteInfo) return null;
+  if (!viewingDirections && !viewingRouteInfo && !viewingAlternate) return null;
   if (mediaType !== "mobile") return null;
 
   return (
     <div className="route-bottom-sheet">
       <Card>
-        {viewingDirections ? (
+        {/*
+          {viewingDirections ? (
           <Directions
             onClose={() => actions.closeDirections(routeResult)}
             routeResult={routeResult}
@@ -39,6 +42,30 @@ const RouteBottomSheet = props => {
             routeResult={routeResult}
           />
         )}
+
+        <AlternateRoute
+          onClose={() => actions.closeDirections(routeResult)}
+          routeResult={routeResult}
+        />
+        */}
+        {(() => {
+          if (viewingDirections) {
+            <Directions
+              onClose={() => actions.closeDirections(routeResult)}
+              routeResult={routeResult}
+            />;
+          } else if (viewingRouteInfo) {
+            <RouteInfo
+              onClose={() => actions.closeRouteInfo(routeResult)}
+              routeResult={routeResult}
+            />;
+          } else if (viewingAlternate) {
+            <AlternateRoute
+              onClose={() => actions.closeAlternateRoute(routeResult)}
+              routeResult={routeResult}
+            />;
+          }
+        })()}
       </Card>
     </div>
   );
@@ -49,21 +76,24 @@ RouteBottomSheet.propTypes = {
   mediaType: PropTypes.string,
   routeResult: routeResultProps,
   viewingDirections: PropTypes.bool,
-  viewingRouteInfo: PropTypes.bool
+  viewingRouteInfo: PropTypes.bool,
+  viewingAlternate: PropTypes.bool
 };
 
 RouteBottomSheet.defaultProps = {
   mediaType: "desktop",
   routeResult: null,
   viewingDirections: false,
-  viewingRouteInfo: false
+  viewingRouteInfo: false,
+  viewingAlternate: false
 };
 
 const mapStateToProps = state => ({
   mediaType: state.browser.mediaType,
   routeResult: state.route.routeResult,
   viewingDirections: state.activities.viewingDirections,
-  viewingRouteInfo: state.activities.viewingRouteInfo
+  viewingRouteInfo: state.activities.viewingRouteInfo,
+  viewingAlternate: state.activities.viewingAlternate
 });
 
 const mapDispatchToProps = dispatch => ({

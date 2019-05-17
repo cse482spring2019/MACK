@@ -34,6 +34,7 @@ import AccessMapLogo from "components/Icons/AccessMapLogo";
 import Directions from "components/Directions";
 import ProfileSaveButton from "components/ProfileSaveButton";
 import RouteInfo from "components/RouteInfo";
+import AlternateRoute from "components/AlternateRoute";
 
 import chevronDown from "icons/chevron-down.svg";
 import close from "icons/close.svg";
@@ -69,7 +70,8 @@ class OmniCard extends React.PureComponent {
       settingProfile,
       viewingDirections,
       viewingMapInfo,
-      viewingRouteInfo
+      viewingRouteInfo,
+      viewingAlternate
     } = this.props;
 
     const { showTripOptions } = this.state;
@@ -90,6 +92,17 @@ class OmniCard extends React.PureComponent {
     if (!isMobile && viewingRouteInfo) {
       return (
         <Card className="omnicard route-info--mode">
+          <AlternateRoute
+            onClose={() => actions.closeDirections(routeResult)}
+            routeResult={routeResult}
+          />
+        </Card>
+      );
+    }
+
+    if (!isMobile && viewingAlternate) {
+      return (
+        <Card className="omnicard route-info--mode">
           <RouteInfo
             onClose={() => actions.closeDirections(routeResult)}
             routeResult={routeResult}
@@ -102,6 +115,7 @@ class OmniCard extends React.PureComponent {
     if (isMobile && viewingDirections) return null;
     if (isMobile && viewingMapInfo) return null;
     if (isMobile && viewingRouteInfo) return null;
+    if (isMobile && viewingAlternate) return null;
 
     const header =
       isMobile && planningTrip ? null : (
@@ -329,7 +343,8 @@ OmniCard.propTypes = {
   settingProfile: PropTypes.bool,
   viewingDirections: PropTypes.bool,
   viewingMapInfo: PropTypes.bool,
-  viewingRouteInfo: PropTypes.bool
+  viewingRouteInfo: PropTypes.bool,
+  viewingAlternate: PropTypes.bool
 };
 
 OmniCard.defaultProps = {
@@ -342,7 +357,8 @@ OmniCard.defaultProps = {
   settingProfile: false,
   viewingDirections: false,
   viewingMapInfo: false,
-  viewingRouteInfo: false
+  viewingRouteInfo: false,
+  viewingAlternate: false
 };
 
 const mapStateToProps = state => {
@@ -387,7 +403,8 @@ const mapStateToProps = state => {
     settingProfile: activities.settingProfile,
     viewingDirections: activities.viewingDirections,
     viewingMapInfo: activities.viewingMapInfo,
-    viewingRouteInfo: activities.viewingRouteInfo
+    viewingRouteInfo: activities.viewingRouteInfo,
+    viewingAlternate: activities.viewingAlternate
   };
 };
 

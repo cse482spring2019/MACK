@@ -20,7 +20,8 @@ const TopRightButtons = props => {
     settingProfile,
     viewingMapInfo,
     viewingRoute,
-    viewingRouteInfo
+    viewingRouteInfo,
+    viewingAlternate
   } = props;
 
   // Don't show the 'tour' button outside of 'standard' main and directions views
@@ -59,7 +60,8 @@ TopRightButtons.propTypes = {
   settingProfile: PropTypes.bool,
   viewingMapInfo: PropTypes.bool,
   viewingRoute: PropTypes.bool,
-  viewingRouteInfo: PropTypes.bool
+  viewingRouteInfo: PropTypes.bool,
+  viewingAlternate: PropTypes.bool
 };
 
 TopRightButtons.defaultProps = {
@@ -67,7 +69,8 @@ TopRightButtons.defaultProps = {
   settingProfile: false,
   viewingMapInfo: false,
   viewingRoute: false,
-  viewingRouteInfo: false
+  viewingRouteInfo: false,
+  viewingAlternate: false
 };
 
 const mapStateToProps = state => ({
@@ -75,7 +78,8 @@ const mapStateToProps = state => ({
   settingProfile: state.activities.settingProfile,
   viewingMapInfo: state.activities.viewingMapInfo,
   viewingRoute: state.activities.viewingRoute,
-  viewingRouteInfo: state.activities.viewingRouteInfo
+  viewingRouteInfo: state.activities.viewingRouteInfo,
+  viewingAlternate: state.activities.viewingAlternate
 });
 
 const mapDispatchToProps = dispatch => ({
