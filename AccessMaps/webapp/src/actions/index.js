@@ -46,7 +46,7 @@ export const SAVE_PROFILE_SUCCESS = "SAVE_PROFILE_SUCCESS";
 // Auth and user profile settings
 export const FETCH_USER_PROFILE_REQUEST = "FETCH_USER_PROFILE_REQUEST";
 export const FETCH_USER_PROFILE_FAILURE = "FETCH_USER_PROFILE_FAILURE";
-export const FETCH_USER_PROFILE_SUCCESS = "FETCH_USER_PROFILE_SUCCESS";
+export const FETCH_USER_PROFILE_SUCCESS = "_USER_PROFILE_SUCCESS";
 export const REFRESH_TOKEN_REQUEST = "REFRESH_TOKEN_REQUEST";
 export const REFRESH_TOKEN_FAILURE = "REFRESH_TOKEN_FAILURE";
 export const REFRESH_TOKEN_SUCCESS = "REFRESH_TOKEN_SUCCESS";
@@ -409,14 +409,29 @@ const routeIfValid = (dispatch, getState) => {
 
   const timeStamp = state.routesettings.dateTime;
 
-  if (origin !== null && destination !== null) {
+  if (
+    state.activities.viewingRoute &&
+    origin !== null &&
+    destination !== null
+  ) {
+    dispatch(
+      fetchAlternateRoute(origin, destination, "wheelchair", {
+        uphillMax,
+        downhillMax,
+        avoidCurbs,
+        speed,
+        timeStamp
+      })
+    );
+  } else if (origin !== null && destination !== null) {
     dispatch(
       fetchRoute(origin, destination, "wheelchair", {
         uphillMax,
         downhillMax,
         avoidCurbs,
         speed,
-        timeStamp
+        timeStamp //,
+        //ids
       })
     );
   }
