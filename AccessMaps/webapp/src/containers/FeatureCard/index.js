@@ -175,6 +175,22 @@ const FeatureCard = props => {
         >
           Route to here
         </Button>
+        <Button
+          flat
+          primary
+          onClick={() => {
+            actions.setDestination(
+              selectedFeature.location[0],
+              selectedFeature.location[1],
+              [
+                selectedFeature.location[1].toFixed(6),
+                selectedFeature.location[0].toFixed(6)
+              ].join(", ")
+            );
+          }}
+        >
+          Report
+        </Button>
       </CardActions>
     </Card>
   );

@@ -2,7 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Button from "react-md/src/js/Buttons";
-import { CardText } from "react-md/src/js/Cards";
+import {
+  CardText,
+  Card,
+  CardActions,
+  CardActionsProps
+} from "react-md/src/js/Cards";
 import Toolbar from "react-md/src/js/Toolbars";
 import { routeResult as routeResultProps } from "prop-schema";
 import DirectionsCard from "components/DirectionsCard";
@@ -20,9 +25,14 @@ const AlternateRoute = props => {
           </Button>
         ]}
       />
-      <CardText>
-        <h2>Please mark the location of the obstruction on the route</h2>
-      </CardText>
+      <Card>
+        <CardText>
+          <h2>
+            If you want to request a rereoute, please tap the location of the
+            obstruction on the map.
+          </h2>
+        </CardText>
+      </Card>
     </React.Fragment>
   );
 };
