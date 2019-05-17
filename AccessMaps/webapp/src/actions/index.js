@@ -410,7 +410,7 @@ const routeIfValid = (dispatch, getState) => {
   const timeStamp = state.routesettings.dateTime;
 
   if (
-    state.activities.viewingRoute &&
+    state.activities.viewingAlternate &&
     origin !== null &&
     destination !== null
   ) {
