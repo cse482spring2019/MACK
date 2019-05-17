@@ -24,9 +24,8 @@ export const TOGGLE_SETTING_PROFILE = "TOGGLE_SETTING_PROFILE";
 export const OPEN_REGION_SELECTIONS = "OPEN_REGION_SELECTIONS";
 export const CLOSE_REGION_SELECTIONS = "CLOSE_REGION_SELECTIONS";
 
-// Allternate route stuff
+// Alternate route stuff
 export const VIEW_ALTERNATE_ROUTE = "VIEW_ALTERNATE_ROUTE";
-export const CLOSE_ALTERNATE_ROUTE = "CLOSE_ALTERNATE_ROUTE";
 
 // Routing profile settings
 export const SET_SPEED = "SET_SPEED";
@@ -801,16 +800,6 @@ export const viewAlternateRoute = routeResult => ({
   meta: {
     analytics: {
       type: "view-alternate-route"
-    }
-  }
-});
-
-export const closeAlternateRoute = routeResult => ({
-  type: CLOSE_ALTERNATE_ROUTE,
-  payload: routeResult,
-  meta: {
-    analytics: {
-      type: "close-alternate-route"
     }
   }
 });

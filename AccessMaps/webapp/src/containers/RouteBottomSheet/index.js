@@ -30,25 +30,22 @@ const RouteBottomSheet = props => {
   return (
     <div className="route-bottom-sheet">
       <Card>
-        {/*
-          {viewingDirections ? (
-          <Directions
-            onClose={() => actions.closeDirections(routeResult)}
-            routeResult={routeResult}
-          />
-        ) : (
-          <RouteInfo
-            onClose={() => actions.closeDirections(routeResult)}
-            routeResult={routeResult}
-          />
-        )}
+        <Directions
+          onClose={() => actions.closeDirections(routeResult)}
+          routeResult={routeResult}
+        />
+
+        <RouteInfo
+          onClose={() => actions.closeDirections(routeResult)}
+          routeResult={routeResult}
+        />
 
         <AlternateRoute
           onClose={() => actions.closeDirections(routeResult)}
           routeResult={routeResult}
         />
-        */}
-        {(() => {
+
+        {/* {(() => {
           if (viewingDirections) {
             <Directions
               onClose={() => actions.closeDirections(routeResult)}
@@ -65,7 +62,7 @@ const RouteBottomSheet = props => {
               routeResult={routeResult}
             />;
           }
-        })()}
+        })()} */}
       </Card>
     </div>
   );

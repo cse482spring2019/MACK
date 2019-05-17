@@ -102,7 +102,7 @@ class OmniCard extends React.PureComponent {
 
     if (!isMobile && viewingAlternate) {
       return (
-        <Card className="omnicard route-info--mode">
+        <Card className="omnicard">
           <RouteInfo
             onClose={() => actions.closeDirections(routeResult)}
             routeResult={routeResult}

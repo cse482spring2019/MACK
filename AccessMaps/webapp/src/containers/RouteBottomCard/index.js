@@ -47,7 +47,7 @@ const RouteBottomCard = props => {
           className="route-bottom-card--button"
           raised
           primary
-          onClick={() => actions.viewAlternateRoute(routeResult)}
+          onClick={() => actions.viewRouteInfo(routeResult)}
         >
           Trip info
         </Button>
@@ -63,7 +63,7 @@ const RouteBottomCard = props => {
           className="route-bottom-card--button"
           raised
           primary
-          onClick={() => actions.viewRouteInfo(routeResult)}
+          onClick={() => actions.viewAlternateRoute(routeResult)}
         >
           Reroute
         </Button>
@@ -84,17 +84,17 @@ RouteBottomCard.propTypes = {
 RouteBottomCard.defaultProps = {
   routeResult: null,
   viewingRoute: false,
-  viewingAlternate: false,
+  viewingRouteInfo: false,
   viewingDirections: false,
-  viewingRouteInfo: false
+  viewingAlternate: false
 };
 
 const mapStateToProps = state => ({
   routeResult: state.route.routeResult,
-  viewingAlternate: state.activities.viewingAlternate,
+  viewingRouteInfo: state.activities.viewingRouteInfo,
   viewingDirections: state.activities.viewingDirections,
   viewingRoute: state.activities.viewingRoute,
-  viewingRouteInfo: state.activities.viewingRouteInfo
+  viewingAlternate: state.activities.viewingAlternate
 });
 
 const mapDispatchToProps = dispatch => ({
