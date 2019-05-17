@@ -21,7 +21,7 @@ const AlternateRoute = props => {
         ]}
       />
       <CardText>
-        <h4>Please mark the location of the obstruction on the route</h4>
+        <h2>Please mark the location of the obstruction on the route</h2>
       </CardText>
     </React.Fragment>
   );
