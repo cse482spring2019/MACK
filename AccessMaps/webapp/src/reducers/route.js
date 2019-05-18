@@ -1,9 +1,23 @@
 import { combineReducers } from "redux";
 import { actionTypes as router5Types } from "redux-router5";
 
-import { FAILED_ROUTE, RECEIVE_ROUTE, REQUEST_ROUTE } from "actions";
+import {
+  FAILED_ROUTE,
+  RECEIVE_ROUTE,
+  REQUEST_ROUTE,
+  SET_OBSTACLE
+} from "actions";
 
 import { defaultRoute as defaults } from "reducers/defaults";
+
+const handleSettingObstacle = (state = defaults.blacklistedEdges, action) => {
+  switch (action.type) {
+    case SET_OBSTACLE:
+      return [action.payload];
+    default:
+      return state;
+  }
+};
 
 const handleRoute = (state = defaults.routeResult, action) => {
   switch (action.type) {
@@ -33,5 +47,6 @@ const handleFetchingRoute = (state = defaults.fetchingRoute, action) => {
 
 export default combineReducers({
   fetchingRoute: handleFetchingRoute,
-  routeResult: handleRoute
+  routeResult: handleRoute,
+  blacklistedEdges: handleSettingObstacle
 });
