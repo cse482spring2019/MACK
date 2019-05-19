@@ -4,8 +4,11 @@ from ...network_queries import candidates_dwithin
 from ...algorithms.shortest_path import _choose_candidate
 from ...algorithms.reachable import reachable
 
+import click
 
 def reachable_view(view_args, cost_function, reachable_function):
+    click.echo("Reachable view endpoint hit " + str(view_args))
+
     lon = view_args["lon"]
     lat = view_args["lat"]
     max_cost = view_args["max_cost"]
