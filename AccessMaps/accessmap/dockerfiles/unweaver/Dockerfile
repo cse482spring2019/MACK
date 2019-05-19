@@ -20,8 +20,7 @@ ADD ./unweaver /install/unweaver
 
 WORKDIR /install/unweaver
 
-RUN git checkout $GIT_HASH \
- && poetry install
+RUN poetry install
 
 RUN poetry add osm-humanized-opening-hours \
   && poetry add pytz
