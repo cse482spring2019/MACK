@@ -37,10 +37,22 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/unweaver/server/views/directions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="100" column="5" lean-forward="true" selection-start-line="100" selection-start-column="5" selection-end-line="100" selection-end-column="5" />
+            <state relative-caret-position="270">
+              <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/unweaver/algorithms/shortest_path.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3">
+              <caret line="65" column="26" selection-start-line="65" selection-start-column="22" selection-end-line="65" selection-end-column="26" />
+              <folding>
+                <element signature="e#69#90#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -63,6 +75,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>directions_view</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -78,12 +91,13 @@
         <option value="$PROJECT_DIR$/unweaver/server/views/reachable.py" />
         <option value="$PROJECT_DIR$/unweaver/server/views/shortest_paths.py" />
         <option value="$PROJECT_DIR$/unweaver/server/views/__init__.py" />
+        <option value="$PROJECT_DIR$/venv/lib/python3.5/site-packages/networkx/algorithms/shortest_paths/weighted.py" />
         <option value="$PROJECT_DIR$/unweaver/server/views/directions.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="4">
-    <option name="x" value="992" />
+    <option name="x" value="65" />
     <option name="y" value="24" />
     <option name="width" value="928" />
     <option name="height" value="1056" />
@@ -168,7 +182,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="992" y="24" width="928" height="1056" extended-state="4" />
+    <frame x="65" y="24" width="928" height="1056" extended-state="4" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.3878453" />
@@ -310,13 +324,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/unweaver/algorithms/shortest_path.py">
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/networkx/algorithms/shortest_paths/weighted.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="61" column="16" selection-start-line="61" selection-start-column="13" selection-end-line="61" selection-end-column="16" />
-          <folding>
-            <element signature="e#69#90#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-924">
+          <caret line="625" column="4" selection-start-line="625" selection-start-column="4" selection-end-line="625" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -330,10 +341,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/unweaver/algorithms/shortest_path.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3">
+          <caret line="65" column="26" selection-start-line="65" selection-start-column="22" selection-end-line="65" selection-end-column="26" />
+          <folding>
+            <element signature="e#69#90#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/unweaver/server/views/directions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="100" column="5" lean-forward="true" selection-start-line="100" selection-start-column="5" selection-end-line="100" selection-end-column="5" />
+        <state relative-caret-position="270">
+          <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>

@@ -5,19 +5,6 @@ from ...algorithms.shortest_path import route_legs, waypoint_legs, NoPathError
 import click
 
 
-def pop_waypoints(wp, blacklist):
-    for coord in set(wp.keys()):
-        node1 = wp[coord]['edge']['_u']
-        node2 = wp[coord]['edge']['_v']
-
-        bedge1 = (node1, node2)
-        bedge2 = (node2, node1)
-
-        if bedge1 in blacklist or bedge2 in blacklist:
-            wp.pop(coord)
-            print('popped edge ' + str(bedge1))
-
-
 def blacklist_waypoints(bwp, blacklist):
     for bbwp in bwp.values():
         node1 = bbwp['edge']['_u']
@@ -49,6 +36,7 @@ def add_blacklist(blacklist, coord_list, cost_function):
 
     return None
 
+
 def directions_view(view_args, cost_function, directions_function):
     click.echo("Directions view endpoint hit " + str(view_args))
 
@@ -57,6 +45,7 @@ def directions_view(view_args, cost_function, directions_function):
     lon2 = view_args["lon2"]
     lat2 = view_args["lat2"]
     blacklist = set()
+    view_args['blacklist'] = [-122.3343196, 47.599956, -122.3343161, 47.5983948]
     if 'blacklist' in view_args:
         err = add_blacklist(blacklist, view_args['blacklist'], cost_function)
         if err is not None:
@@ -66,9 +55,6 @@ def directions_view(view_args, cost_function, directions_function):
 
     legs = waypoint_legs(g.G, [[lon1, lat1], [lon2, lat2]], cost_function)
     for i, (wp1, wp2) in enumerate(legs):
-        print('wp1', wp1)
-        print('wp2', wp2)
-        print()
         if wp1 is None:
             return jsonify(
                 {
@@ -86,11 +72,19 @@ def directions_view(view_args, cost_function, directions_function):
                 }
             )
 
-        pop_waypoints(wp1, blacklist)
-        pop_waypoints(wp2, blacklist)
+    def cost_function_blacklist(u, v, ddict):
+        if (u, v) in blacklist:
+            #print('\tblacklisted', u, v)
+            return float('inf')
+        if (v, u) in blacklist:
+            #print('\tblacklisted', u, v)
+            return float('inf')
+
+        return cost_function(u, v, ddict)
 
     try:
-        cost, path, edges = route_legs(g.G, legs, cost_function)
+        cost, path, edges = route_legs(g.G, legs, cost_function_blacklist)
+        print('cost of path:', cost)
     except NoPathError:
         return jsonify({"status": "NoPath", "msg": "No path found."})
 
