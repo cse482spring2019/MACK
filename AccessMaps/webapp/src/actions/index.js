@@ -699,10 +699,15 @@ export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
   }
   //console.log("old name" + name);
   const newOrigin = closestEdge[0];
-  lon = newOrigin[0];
-  lat = newOrigin[1];
-  name = "" + precise_round(lon, 6) + ", " + precise_round(lat, 6);
-  //console.log("new lon is " + lon + ",  new lat is " + lat + ", new name is " + name);
+  // lon = newOrigin[0];
+  // lat = newOrigin[1];
+  // name = "" + precise_round(lat, 6) + ", " + precise_round(lon, 6);
+  lon = parseFloat(precise_round(newOrigin[0], 6));
+  lat = parseFloat(precise_round(newOrigin[1], 6));
+  name = lon + ", " + lat;
+  console.log(
+    "new lon is " + lon + ",  new lat is " + lat + ", new name is " + name
+  );
   dispatch({
     type: SET_ORIGIN,
     payload: { lon, lat, name }
@@ -710,13 +715,7 @@ export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
 
   dispatch({
     type: SET_OBSTACLE,
-    payload: closestEdge,
-    meta: {
-      analytics: {
-        type: "set-obstacle",
-        payload: { lon, lat, name }
-      }
-    }
+    payload: closestEdge
   });
 
   routeIfValid(dispatch, getState);
