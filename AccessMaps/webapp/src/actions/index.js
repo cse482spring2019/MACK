@@ -1,3 +1,5 @@
+import * as turf from "@turf/turf";
+
 // Action types
 import { defaultProfiles } from "profiles";
 import { saveProfile } from "utils/api";
@@ -415,7 +417,8 @@ const routeIfValid = (dispatch, getState) => {
     destination !== null
   ) {
     dispatch(
-      fetchAlternateRoute(origin, destination, "wheelchair", {
+      //fetchAlternateRoute(origin, destination, "wheelchair", {
+      fetchRoute(origin, destination, "wheelchair", {
         uphillMax,
         downhillMax,
         avoidCurbs,
@@ -430,8 +433,7 @@ const routeIfValid = (dispatch, getState) => {
         downhillMax,
         avoidCurbs,
         speed,
-        timeStamp //,
-        //ids
+        timeStamp
       })
     );
   }
@@ -676,9 +678,39 @@ export const setOrigin = (lon, lat, name) => (dispatch, getState) => {
 };
 
 export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
+  const state = getState();
+  const nodes = state.route.routeResult.routes[0].segments.features; // node[0].geometry is the 0th linestring in the route
+  //console.log("SIZE OF ARRAY" + nodes.length);
+  const origin = state.route.routeResult.origin.geometry.coordinates; // origin[0]=lon, origin[1]=lat
+  const dest = state.route.routeResult.destination.geometry.coordinates;
+  const obstacle = turf.point([lon, lat]);
+
+  // TODO: need to include origin and destination in calculations too...right now, only
+  // line segments in the route are being considered...I think.
+  var closestEdge = null;
+  var closestDist = Number.MAX_VALUE;
+  for (var i = 0; i < nodes.length; i++) {
+    var distance = turf.pointToLineDistance(obstacle, nodes[i].geometry);
+    //console.log("distance to linestring is " + distance);
+    if (distance < closestDist) {
+      closestDist = distance;
+      closestEdge = nodes[i].geometry.coordinates;
+    }
+  }
+  //console.log("old name" + name);
+  const newOrigin = closestEdge[0];
+  lon = newOrigin[0];
+  lat = newOrigin[1];
+  name = "" + precise_round(lon, 6) + ", " + precise_round(lat, 6);
+  //console.log("new lon is " + lon + ",  new lat is " + lat + ", new name is " + name);
+  dispatch({
+    type: SET_ORIGIN,
+    payload: { lon, lat, name }
+  });
+
   dispatch({
     type: SET_OBSTACLE,
-    payload: { lon, lat, name },
+    payload: closestEdge,
     meta: {
       analytics: {
         type: "set-obstacle",
@@ -689,6 +721,18 @@ export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
 
   routeIfValid(dispatch, getState);
 };
+
+function precise_round(num, dec) {
+  if (typeof num !== "number" || typeof dec !== "number") {
+    return false;
+  }
+
+  var num_sign = num >= 0 ? 1 : -1;
+
+  return (
+    Math.round(num * Math.pow(10, dec) + num_sign * 0.0001) / Math.pow(10, dec)
+  ).toFixed(dec);
+}
 
 export const setDestination = (lon, lat, name) => (dispatch, getState) => {
   dispatch({
