@@ -14,12 +14,13 @@ RUN mkdir -p /install
 WORKDIR /install
 
 # TODO: don't use poetry? It's a bit hacky
-RUN git clone https://github.com/nbolten/unweaver.git unweaver
+#RUN git clone https://github.com/nbolten/unweaver.git unweaver
+
+ADD ./unweaver /install/unweaver
 
 WORKDIR /install/unweaver
 
-RUN git checkout $GIT_HASH \
- && poetry install
+RUN poetry install
 
 RUN poetry add osm-humanized-opening-hours \
   && poetry add pytz

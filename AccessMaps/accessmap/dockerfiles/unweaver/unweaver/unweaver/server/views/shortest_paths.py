@@ -4,8 +4,11 @@ from ...network_queries import candidates_dwithin
 from ...algorithms.shortest_path import _choose_candidate
 from ...algorithms.shortest_paths import shortest_paths
 
+import click
 
 def shortest_paths_view(view_args, cost_function, shortest_paths_function):
+    click.echo("Shortest path view endpoint hit " + str(view_args))
+
     lon = view_args["lon"]
     lat = view_args["lat"]
     max_cost = view_args["max_cost"]

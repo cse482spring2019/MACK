@@ -62,6 +62,7 @@ def add_views(app, profile):
         "lat1": fields.Float(required=True),
         "lon2": fields.Float(required=True),
         "lat2": fields.Float(required=True),
+        "blacklist": fields.List(fields.Float(), required=False)
     }
 
     shortest_paths_args = {
