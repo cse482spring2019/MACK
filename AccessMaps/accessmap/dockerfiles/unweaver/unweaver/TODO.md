@@ -11,6 +11,7 @@
 ## Routing Speed
 
 ### networkx's dijkstra uses G[key].items(), which means multiple round trips to the
+
 db. Need to either replace nx's Atlas upstream in `entwiner` or reimplement dijkstra.
 
 ## entwiner
