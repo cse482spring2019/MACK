@@ -675,10 +675,13 @@ export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
   const dest = state.route.routeResult.destination.geometry.coordinates;
   const obstacle = turf.point([lon, lat]);
 
-  // TODO: need to include origin and destination in calculations too...right now, only
-  // line segments in the route are being considered...I think.
-  var closestEdge = null;
-  var closestDist = Number.MAX_VALUE;
+  var closestEdge = turf.lineString([origin, nodes[0].geometry.coordinates[0]]);
+  var closestDist = turf.pointToLineDistance(obstacle, closestEdge);
+  var lastEdge = turf.lineString([
+    nodes[nodes.length - 1].geometry.coordinates[1],
+    dest
+  ]);
+  nodes.push(lastEdge);
   for (var i = 0; i < nodes.length; i++) {
     var distance = turf.pointToLineDistance(obstacle, nodes[i].geometry);
     //console.log("distance to linestring is " + distance);
@@ -687,6 +690,7 @@ export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
       closestEdge = nodes[i].geometry.coordinates;
     }
   }
+
   //console.log("old name" + name);
   const newOrigin = closestEdge[0];
   // lon = newOrigin[0];
