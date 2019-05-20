@@ -361,8 +361,9 @@ export const fetchRoute = (origin, destination, type, params) => dispatch => {
     uphillMax,
     downhillMax,
     avoidCurbs,
-    // speed,
-    timeStamp
+    //speed,
+    timeStamp,
+    blacklistedEdges
   } = params;
 
   const routeParams = {
@@ -373,7 +374,8 @@ export const fetchRoute = (origin, destination, type, params) => dispatch => {
     uphill: uphillMax,
     downhill: Math.abs(downhillMax),
     avoidCurbs: avoidCurbs ? 1 : 0,
-    timestamp: timeStamp
+    timestamp: timeStamp,
+    BLEdges: blacklistedEdges
   };
 
   const esc = encodeURIComponent;
@@ -411,29 +413,17 @@ const routeIfValid = (dispatch, getState) => {
 
   const timeStamp = state.routesettings.dateTime;
 
-  if (
-    state.activities.viewingAlternate &&
-    origin !== null &&
-    destination !== null
-  ) {
-    dispatch(
-      //fetchAlternateRoute(origin, destination, "wheelchair", {
-      fetchRoute(origin, destination, "wheelchair", {
-        uphillMax,
-        downhillMax,
-        avoidCurbs,
-        speed,
-        timeStamp
-      })
-    );
-  } else if (origin !== null && destination !== null) {
+  const { blacklistedEdges } = state.route;
+
+  if (origin !== null && destination !== null) {
     dispatch(
       fetchRoute(origin, destination, "wheelchair", {
         uphillMax,
         downhillMax,
         avoidCurbs,
         speed,
-        timeStamp
+        timeStamp,
+        blacklistedEdges
       })
     );
   }
