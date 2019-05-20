@@ -45,7 +45,7 @@ def directions_view(view_args, cost_function, directions_function):
     lon2 = view_args["lon2"]
     lat2 = view_args["lat2"]
     blacklist = set()
-    view_args['blacklist'] = [-122.3343196, 47.599956, -122.3343161, 47.5983948]
+    #view_args['blacklist'] = [-122.3343196, 47.599956, -122.3343161, 47.5983948]
     if 'blacklist' in view_args:
         err = add_blacklist(blacklist, view_args['blacklist'], cost_function)
         if err is not None:

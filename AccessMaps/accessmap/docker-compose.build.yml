@@ -22,10 +22,10 @@ services:
       - ./build/tiles:/home/tippecanoe/output:rw
 
   # Build webapp into static assets
-  # TODO: change context so it points to our modified webapp
   webapp:
     build:
-      context: https://github.com/accessmap/accessmap-webapp.git#develop
+      context: ../webapp
+      # https://github.com/kdong/accessmap-webapp.git#develop
     command: npm run build
     volumes:
       - ./data/regions.geojson:/www/public/regions.json:ro
