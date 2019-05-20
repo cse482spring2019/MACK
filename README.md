@@ -1,2 +1,40 @@
 # MACK
-Amenities/rerouting for pedestrians
+
+An AccessMaps feature that provides a rerouting service around obstacles that users may face in their commute.
+
+## Getting Started
+
+These instructions will get you a copy of the project running on your local machine for development and testing.
+
+## Installing
+
+First, you will need to clone the repository to your local machine, using:
+
+`git clone https://github.com/cse482spring2019/MACK.git`
+
+on the command line, or by downloading the ZIP folder with the github webpage.
+
+Next, set your environment variables in the `.env` file in `/AccessMaps/accessmap` to be hosted at localhost, as such:
+
+`HOST=localhost`, and entering your `OSM_CLIENT_ID`, `OSM_CLIENT_SECRET`, as well as your `MAPBOX_TOKEN`.
+
+Then, set the environment variables found in the `.env` file in `AccessMaps/webapps`:
+
+```
+  API_SERVER=http://localhost:2015/api/v1
+  ROUTING_SERVER=http://localhost:2015/api/v1/routing
+  TILE_SERVER=http://localhost:2015/tiles
+```
+
+After that, make the `deploy_dev.sh` script executable with:
+
+`chmod u+x deploy_dev.sh`, and then use
+`./deploy_dev.sh` to run the script that will build the docker containers.
+
+After that, we can run `docker-compose up` in `AccessMaps/accessmap` to start the docker aggregation of container outputs.
+
+While running `docker-compose up`, run `npm start` in the `AccessMaps/webapps` directory to deploy the web app.
+
+## About
+
+Built on top of https://www.accessmap.io/, we aim to provide a rerouting feature that will assist users with navigating around obstacles they face in the Seattle area.
