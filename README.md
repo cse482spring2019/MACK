@@ -8,17 +8,17 @@ These instructions will get you a copy of the project running on your local mach
 
 ## Installing
 
-First, you will need to clone the repository to your local machine, using:
+First, clone the repository to your local machine, using:
 
 `git clone https://github.com/cse482spring2019/MACK.git`
 
-on the command line, or by downloading the ZIP folder with the github webpage.
+on the command line, or by downloading the .ZIP folder with the github webpage.
 
 Next, set your environment variables in the `.env` file in `/AccessMaps/accessmap` to be hosted at localhost, as such:
 
-`HOST=localhost`, and entering your `OSM_CLIENT_ID`, `OSM_CLIENT_SECRET`, as well as your `MAPBOX_TOKEN`.
+`HOST=localhost`, and also entering your `OSM_CLIENT_ID=...`, `OSM_CLIENT_SECRET=...`, as well as your `MAPBOX_TOKEN=...`.
 
-Then, set the environment variables found in the `.env` file in `AccessMaps/webapps`:
+Then, set the environment variables found in the `.env` file in `AccessMaps/webapps` with:
 
 ```
   API_SERVER=http://localhost:2015/api/v1
@@ -26,12 +26,14 @@ Then, set the environment variables found in the `.env` file in `AccessMaps/weba
   TILE_SERVER=http://localhost:2015/tiles
 ```
 
+So that we are able to get the api server for users, routing server for generating routes, and the tiles server for using OpenStreetMaps data to build our map.
+
 After that, make the `deploy_dev.sh` script executable with:
 
 `chmod u+x deploy_dev.sh`, and then use
-`./deploy_dev.sh` to run the script that will build the docker containers.
+`./deploy_dev.sh` to run the script that will build the docker containers. Using the `deploy_dev.sh` script will eliminate the need to remember the `docker-compose` build instructions.
 
-After that, we can run `docker-compose up` in `AccessMaps/accessmap` to start the docker aggregation of container outputs.
+After that, run `docker-compose up` in `AccessMaps/accessmap` to start the docker aggregation of container outputs.
 
 While running `docker-compose up`, run `npm start` in the `AccessMaps/webapps` directory to deploy the web app.
 
