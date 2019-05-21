@@ -158,8 +158,9 @@ const FeatureCard = props => {
               );
             }}
           >
-            Report Obstacle Here
+            Report Obstacle
           </Button>
+          {/* TODO: REMOVE OR LEAVE for demo?*/}
           <Button
             flat
             primary
@@ -210,6 +211,22 @@ const FeatureCard = props => {
             }}
           >
             Route to here
+          </Button>
+          <Button
+            flat
+            primary
+            onClick={() => {
+              actions.setObstacle(
+                selectedFeature.location[0],
+                selectedFeature.location[1],
+                [
+                  selectedFeature.location[1].toFixed(6),
+                  selectedFeature.location[0].toFixed(6)
+                ].join(", ")
+              );
+            }}
+          >
+            Report Obstacle
           </Button>
         </CardActions>
       )}
