@@ -35,8 +35,8 @@ def add_blacklist(blacklist, coord_list, cost_function):
             #blacklist_waypoints(bwp1, blacklist)
             #blacklist_waypoints(bwp2, blacklist)
         '''
-        p1 = str(precise_round(blon1, 5)) + ', ' + str(precise_round(blat1, 5))
-        p2 = str(precise_round(blon2, 5)) + ', ' + str(precise_round(blat2, 5))
+        p1 = str(precise_round(blon1, 7)) + ', ' + str(precise_round(blat1, 7))
+        p2 = str(precise_round(blon2, 7)) + ', ' + str(precise_round(blat2, 7))
         blacklist.add((p1, p2))
         blacklist.add((p2, p1))
 
@@ -57,7 +57,7 @@ def directions_view(view_args, cost_function, directions_function):
         if err is not None:
             return err
 
-    print('blacklists:', blacklist)
+    #print('blacklists:', blacklist)
 
     legs = waypoint_legs(g.G, [[lon1, lat1], [lon2, lat2]], cost_function)
     for i, (wp1, wp2) in enumerate(legs):
@@ -78,10 +78,10 @@ def directions_view(view_args, cost_function, directions_function):
                 }
             )
 
-    print('legs', legs)
+    #print('legs', legs)
     def cost_function_blacklist(u, v, ddict):
-        lon1, lat1 = precise_round(u.split(',')[0], 5), precise_round(u.split(',')[1], 5)
-        lon2, lat2 = precise_round(v.split(',')[0], 5), precise_round(v.split(',')[1], 5)
+        lon1, lat1 = precise_round(u.split(',')[0], 7), precise_round(u.split(',')[1], 7)
+        lon2, lat2 = precise_round(v.split(',')[0], 7), precise_round(v.split(',')[1], 7)
 
         u = str(lon1) + ', ' + str(lat1) 
         v = str(lon2) + ', ' + str(lat2)
@@ -92,7 +92,6 @@ def directions_view(view_args, cost_function, directions_function):
             #print('\tblacklisted', u, v)
             return float('inf')
 
-        print(u, v, "not blacklisted", blacklist)
         return cost_function(u, v, ddict)
 
     try:
