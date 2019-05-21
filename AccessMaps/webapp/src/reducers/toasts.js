@@ -7,7 +7,7 @@ import {
   RECEIVE_ROUTE,
   SAVE_PROFILE_SUCCESS,
   SAVE_PROFILE_FAILURE,
-  VIEW_ALTERNATE_ROUTE
+  SET_OBSTACLE
 } from "actions";
 
 import { defaultToasts as defaults } from "reducers/defaults";
@@ -62,8 +62,8 @@ export default (state = defaults, action) => {
         default:
           return toasts;
       }
-    case VIEW_ALTERNATE_ROUTE:
-      toasts.push("rerouting...");
+    case SET_OBSTACLE:
+      toasts.push("obstacle recorded");
       return toasts;
     default:
       return state;

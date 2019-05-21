@@ -28,10 +28,16 @@ Then, set the environment variables found in the `.env` file in `AccessMaps/weba
 
 So that we are able to get the api server for users, routing server for generating routes, and the tiles server for using OpenStreetMaps data to build our map.
 
-After that, make the `deploy_dev.sh` script executable with:
+After that, make the `deploy_dev.sh` script executable with: `chmod u+x deploy_dev.sh`,
 
-`chmod u+x deploy_dev.sh`, and then use
+and then use
 `./deploy_dev.sh` to run the script that will build the docker containers. Using the `deploy_dev.sh` script will eliminate the need to remember the `docker-compose` build instructions.
+
+Then, we need to build the web app, by running:
+
+`npm run build`
+
+in the `/webapps/` directory.
 
 After that, run `docker-compose up` in `AccessMaps/accessmap` to start the docker aggregation of container outputs.
 

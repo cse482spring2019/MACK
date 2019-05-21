@@ -160,6 +160,22 @@ const FeatureCard = props => {
           >
             Report Obstacle Here
           </Button>
+          <Button
+            flat
+            primary
+            onClick={() => {
+              actions.setOrigin(
+                selectedFeature.location[0],
+                selectedFeature.location[1],
+                [
+                  selectedFeature.location[1].toFixed(6),
+                  selectedFeature.location[0].toFixed(6)
+                ].join(", ")
+              );
+            }}
+          >
+            Set new origin
+          </Button>
         </CardActions>
       ) : (
         <CardActions>
@@ -212,7 +228,10 @@ FeatureCard.propTypes = {
   viewingAlternate: PropTypes.bool
 };
 
-FeatureCard.defaultProps = { selectedFeature: null, viewingAlternate: false };
+FeatureCard.defaultProps = {
+  selectedFeature: null,
+  viewingAlternate: false
+};
 
 const mapStateToProps = state => ({
   selectedFeature: state.map.selectedFeature,

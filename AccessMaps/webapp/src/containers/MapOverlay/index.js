@@ -23,13 +23,16 @@ const MapOverlay = props => {
       className={cn("map-overlay", {
         directions:
           mediaType === "mobile" &&
-          (viewingDirections || viewingRouteInfo || viewingAlternate),
+          (viewingDirections && !viewingRouteInfo && !viewingAlternate),
         routeview:
           mediaType === "mobile" &&
           (viewingRoute &&
             !viewingDirections &&
             !viewingRouteInfo &&
-            !viewingAlternate)
+            !viewingAlternate),
+        alternate:
+          mediaType === "mobile" &&
+          (viewingAlternate && !viewingDirections && !viewingRouteInfo)
       })}
     >
       {children}
