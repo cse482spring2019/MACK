@@ -714,6 +714,7 @@ export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
   });
 
   routeIfValid(dispatch, getState);
+  dispatch({ type: CLOSE_DIRECTIONS });
 };
 
 function precise_round(num, dec) {
