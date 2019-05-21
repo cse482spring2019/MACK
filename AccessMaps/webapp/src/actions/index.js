@@ -727,6 +727,8 @@ export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
     payload: newPayload
   });
 
+  dispatch({ type: CLOSE_DIRECTIONS });
+  dispatch({ type: VIEW_DIRECTIONS });
   routeIfValid(dispatch, getState);
   // dispatch({
   //   type: CLOSE_DIRECTIONS,
