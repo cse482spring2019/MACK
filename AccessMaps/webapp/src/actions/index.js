@@ -374,14 +374,29 @@ export const fetchRoute = (origin, destination, type, params) => dispatch => {
     uphill: uphillMax,
     downhill: Math.abs(downhillMax),
     avoidCurbs: avoidCurbs ? 1 : 0,
-    timestamp: timeStamp,
-    BLEdges: blacklistedEdges
+    timestamp: timeStamp
   };
 
   const esc = encodeURIComponent;
-  const urlQuery = Object.keys(routeParams)
+  var urlQuery = Object.keys(routeParams)
     .map(k => `${esc(k)}=${esc(routeParams[k])}`)
     .join("&");
+
+  if (blacklistedEdges != null) {
+    const separatorString = "&blacklist=";
+    for (var i = 0; i < blacklistedEdges.length; i++) {
+      var edge = blacklistedEdges[i];
+      urlQuery +=
+        separatorString +
+        edge[0][0] +
+        separatorString +
+        edge[0][1] +
+        separatorString +
+        edge[1][0] +
+        separatorString +
+        edge[1][1];
+    }
+  }
 
   const query = `${
     window.location.origin
