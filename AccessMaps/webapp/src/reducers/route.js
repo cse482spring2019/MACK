@@ -13,7 +13,7 @@ import { defaultRoute as defaults } from "reducers/defaults";
 const handleSettingObstacle = (state = defaults.blacklistedEdges, action) => {
   switch (action.type) {
     case SET_OBSTACLE:
-      return [action.payload];
+      return action.payload;
     default:
       return state;
   }

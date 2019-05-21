@@ -669,43 +669,48 @@ export const setOrigin = (lon, lat, name) => (dispatch, getState) => {
 
 export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
   const state = getState();
-  const nodes = state.route.routeResult.routes[0].segments.features; // node[0].geometry is the 0th linestring in the route
-  //console.log("SIZE OF ARRAY" + nodes.length);
+  const edges = state.route.routeResult.routes[0].segments.features; // edges[0].geometry is the 0th linestring in the route
   const origin = state.route.routeResult.origin.geometry.coordinates; // origin[0]=lon, origin[1]=lat
   const dest = state.route.routeResult.destination.geometry.coordinates;
   const obstacle = turf.point([lon, lat]);
 
-  // TODO: need to include origin and destination in calculations too...right now, only
-  // line segments in the route are being considered...I think.
-  var closestEdge = null;
-  var closestDist = Number.MAX_VALUE;
-  for (var i = 0; i < nodes.length; i++) {
-    var distance = turf.pointToLineDistance(obstacle, nodes[i].geometry);
-    //console.log("distance to linestring is " + distance);
+  var closestEdge = turf.lineString([origin, edges[0].geometry.coordinates[0]]);
+  var closestDist = turf.pointToLineDistance(obstacle, closestEdge);
+  var lastEdge = turf.lineString([
+    edges[edges.length - 1].geometry.coordinates[1],
+    dest
+  ]);
+  edges.push(lastEdge);
+  for (var i = 0; i < edges.length; i++) {
+    var distance = turf.pointToLineDistance(obstacle, edges[i].geometry);
     if (distance < closestDist) {
       closestDist = distance;
-      closestEdge = nodes[i].geometry.coordinates;
+      closestEdge = edges[i].geometry.coordinates;
     }
   }
-  //console.log("old name" + name);
+
   const newOrigin = closestEdge[0];
-  // lon = newOrigin[0];
-  // lat = newOrigin[1];
-  // name = "" + precise_round(lat, 6) + ", " + precise_round(lon, 6);
   lon = parseFloat(precise_round(newOrigin[0], 6));
   lat = parseFloat(precise_round(newOrigin[1], 6));
   name = lon + ", " + lat;
-  console.log(
-    "new lon is " + lon + ",  new lat is " + lat + ", new name is " + name
-  );
+
   dispatch({
     type: SET_ORIGIN,
     payload: { lon, lat, name }
   });
 
+  var newPayload = null;
+  if (state.route.blacklistedEdges != null) {
+    var oldBLEdges = Object.assign([], state.route.blacklistedEdges);
+    oldBLEdges.push(closestEdge);
+    newPayload = oldBLEdges;
+  } else {
+    newPayload = [];
+    newPayload.push(closestEdge);
+  }
   dispatch({
     type: SET_OBSTACLE,
-    payload: closestEdge
+    payload: newPayload
   });
 
   routeIfValid(dispatch, getState);
