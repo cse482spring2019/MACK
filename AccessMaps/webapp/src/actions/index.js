@@ -699,9 +699,18 @@ export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
     payload: { lon, lat, name }
   });
 
+  var newPayload = null;
+  if (state.route.blacklistedEdges != null) {
+    var oldBLEdges = Object.assign([], state.route.blacklistedEdges);
+    oldBLEdges.push(closestEdge);
+    newPayload = oldBLEdges;
+  } else {
+    newPayload = [];
+    newPayload.push(closestEdge);
+  }
   dispatch({
     type: SET_OBSTACLE,
-    payload: closestEdge
+    payload: newPayload
   });
 
   routeIfValid(dispatch, getState);
