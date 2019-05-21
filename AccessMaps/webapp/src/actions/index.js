@@ -28,7 +28,6 @@ export const CLOSE_REGION_SELECTIONS = "CLOSE_REGION_SELECTIONS";
 
 // Alternate route stuff
 export const VIEW_ALTERNATE_ROUTE = "VIEW_ALTERNATE_ROUTE";
-export const FETCH_ALTERNATE_ROUTE = "FETCH_ALTERNATE_ROUTE";
 export const SET_OBSTACLE = "SET_OBSTACLE";
 
 // Routing profile settings
@@ -729,7 +728,16 @@ export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
   });
 
   routeIfValid(dispatch, getState);
-  dispatch({ type: CLOSE_DIRECTIONS });
+  dispatch({
+    type: CLOSE_DIRECTIONS,
+    payload: routeResult,
+    meta: {
+      analytics: {
+        type: "close-directions"
+      }
+    }
+  });
+  // Close viewingAlternate window in actions after obstacle is set
 };
 
 function precise_round(num, dec) {

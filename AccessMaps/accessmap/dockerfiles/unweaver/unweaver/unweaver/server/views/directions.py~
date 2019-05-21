@@ -35,10 +35,8 @@ def add_blacklist(blacklist, coord_list, cost_function):
             #blacklist_waypoints(bwp1, blacklist)
             #blacklist_waypoints(bwp2, blacklist)
         '''
-        p1 = str(precise_round(blon1, 5)) + ', ' + str(precise_round(blat1, 5))
-        p2 = str(precise_round(blon2, 5)) + ', ' + str(precise_round(blat2, 5))
-        blacklist.add((p1, p2))
-        blacklist.add((p2, p1))
+        blacklist.add(((blon1, blat1), (blon2, blat2)))
+        blacklist.add(((blon2, blat2), (blon1, blat1)))
 
     return None
 
@@ -80,16 +78,11 @@ def directions_view(view_args, cost_function, directions_function):
 
     print('legs', legs)
     def cost_function_blacklist(u, v, ddict):
-        lon1, lat1 = precise_round(u.split(',')[0], 5), precise_round(u.split(',')[1], 5)
-        lon2, lat2 = precise_round(v.split(',')[0], 5), precise_round(v.split(',')[1], 5)
-
-        u = str(lon1) + ', ' + str(lat1) 
-        v = str(lon2) + ', ' + str(lat2)
         if (u, v) in blacklist:
-            #print('\tblacklisted', u, v)
+            print('\tblacklisted', u, v)
             return float('inf')
         if (v, u) in blacklist:
-            #print('\tblacklisted', u, v)
+            print('\tblacklisted', u, v)
             return float('inf')
 
         print(u, v, "not blacklisted", blacklist)
@@ -116,10 +109,7 @@ def directions_view(view_args, cost_function, directions_function):
 
     return jsonify(directions)
 
-def precise_round(num, dec):
-    num = float(num)
-    num_sign = 1 
-    if num < 0:
-        num_sign = -1
+    def precise_round(num, dec):
+        num_sign = num >= 0 ? 1 : -1;
 
-    return round(num * (10 ** dec) + num_sign * 0.0001) / (10 ** dec)
+        return round(num * Math.pow)
