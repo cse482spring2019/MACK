@@ -33,15 +33,13 @@ After that, make the `deploy_dev.sh` script executable with: `chmod u+x deploy_d
 and then use
 `./deploy_dev.sh` to run the script that will build the docker containers. Using the `deploy_dev.sh` script will eliminate the need to remember the `docker-compose` build instructions.
 
-Then, we need to build the web app, by running:
 
-`npm run build`
 
-in the `/webapps/` directory on a version of npm 6.1.0+, and node 10.7.0+.
+In the `/webapps/` directory on a version of npm 6.1.0+, and node 10.7.0+,
 
-After that, run `docker-compose up` in `AccessMaps/accessmap` to start the docker aggregation of container outputs.
+Run `docker-compose up` in `AccessMaps/accessmap` to start the docker aggregation of container outputs.
 
-While running `docker-compose up`, run `npm start` in the `AccessMaps/webapps` directory to deploy the web app.
+While running `docker-compose up`, run `npm start` in a new window in the `AccessMaps/webapps` directory to deploy the web app.
 
 ## About
 
