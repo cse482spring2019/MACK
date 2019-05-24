@@ -704,9 +704,9 @@ export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
   }
 
   const newOrigin = closestEdge[0];
-  lon = parseFloat(precise_round(newOrigin[0], 8));
-  lat = parseFloat(precise_round(newOrigin[1], 8));
-  name = lon + ", " + lat;
+  lon = parseFloat(precise_round(newOrigin[0], 6));
+  lat = parseFloat(precise_round(newOrigin[1], 6));
+  name = lon + "&blacklist=" + lat;
 
   dispatch({
     type: SET_ORIGIN,
@@ -727,8 +727,6 @@ export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
     payload: newPayload
   });
 
-  dispatch({ type: CLOSE_DIRECTIONS });
-  dispatch({ type: VIEW_DIRECTIONS });
   routeIfValid(dispatch, getState);
   // dispatch({
   //   type: CLOSE_DIRECTIONS,
