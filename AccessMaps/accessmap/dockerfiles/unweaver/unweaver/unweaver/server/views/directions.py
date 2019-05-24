@@ -83,7 +83,7 @@ def directions_view(view_args, cost_function, directions_function):
         lon1, lat1 = precise_round(u.split(',')[0], 7), precise_round(u.split(',')[1], 7)
         lon2, lat2 = precise_round(v.split(',')[0], 7), precise_round(v.split(',')[1], 7)
 
-        u = str(lon1) + ', ' + str(lat1) 
+        u = str(lon1) + ', ' + str(lat1)
         v = str(lon2) + ', ' + str(lat2)
         if (u, v) in blacklist:
             #print('\tblacklisted', u, v)
@@ -117,7 +117,7 @@ def directions_view(view_args, cost_function, directions_function):
 
 def precise_round(num, dec):
     num = float(num)
-    num_sign = 1 
+    num_sign = 1
     if num < 0:
         num_sign = -1
 
