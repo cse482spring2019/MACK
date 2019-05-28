@@ -19,6 +19,15 @@ DIVISOR = 5
 INCLINE_IDEAL = -0.0087
 
 
+def precise_round(num, dec):
+    num = float(num)
+    num_sign = 1
+    if num < 0:
+        num_sign = -1
+
+    return round(num * (10 ** dec) + num_sign * 0.0001) / (10 ** dec)
+
+
 def find_k(g, m, n):
     return math.log(n) / abs(g - m)
 
@@ -27,7 +36,20 @@ def tobler(grade, k=3.5, m=INCLINE_IDEAL, base=WALK_BASE):
     # Modified to be in meters / second rather than km / h
     return base * math.exp(-k * abs(grade - m))
 
-def cost_fun_generator(base_speed=WALK_BASE, downhill=0.1,
+
+def add_blacklist(blacklist, coord_list):
+    for i in range(len(coord_list) // 4):
+        blon1 = coord_list[4 * i]
+        blat1 = coord_list[4 * i + 1]
+        blon2 = coord_list[4 * i + 2]
+        blat2 = coord_list[4 * i + 3]
+        p1 = str(precise_round(blon1, 7)) + ', ' + str(precise_round(blat1, 7))
+        p2 = str(precise_round(blon2, 7)) + ', ' + str(precise_round(blat2, 7))
+        blacklist.add((p1, p2))
+        blacklist.add((p2, p1))
+
+
+def cost_fun_generator(base_speed=WALK_BASE, downhill=0.1, blacklist_edges=[],
                        uphill=0.085, avoidCurbs=True, timestamp=None):
     """Calculates a cost-to-travel that balances distance vs. steepness vs.
     needing to cross the street.
@@ -43,6 +65,9 @@ def cost_fun_generator(base_speed=WALK_BASE, downhill=0.1,
     """
     k_down = find_k(-downhill, INCLINE_IDEAL, DIVISOR)
     k_up = find_k(uphill, INCLINE_IDEAL, DIVISOR)
+
+    blacklist = set()
+    add_blacklist(blacklist, blacklist_edges)
 
     if timestamp is None:
         date = datetime.now(pytz.timezone('US/Pacific'))
@@ -127,4 +152,19 @@ def cost_fun_generator(base_speed=WALK_BASE, downhill=0.1,
         # Return time estimate - this is currently the cost
         return time
 
-    return cost_fun
+    def cost_fun_with_blacklist(u, v, d):
+	lon1, lat1 = precise_round(u.split(',')[0], 7), precise_round(u.split(',')[1], 7)
+        lon2, lat2 = precise_round(v.split(',')[0], 7), precise_round(v.split(',')[1], 7)
+
+        u = str(lon1) + ', ' + str(lat1)
+        v = str(lon2) + ', ' + str(lat2)
+        if (u, v) in blacklist:
+            #print('\tblacklisted', u, v)
+            return None
+        if (v, u) in blacklist:
+            #print('\tblacklisted', u, v)
+            return None
+
+	return cost_fun(u, v, d)
+
+    return cost_fun_with_blacklist
