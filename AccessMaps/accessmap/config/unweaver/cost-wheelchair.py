@@ -6,7 +6,7 @@ import pytz
 
 ## Default base moving speeds for different modes. All in m/s.
 # Slightly lower than average walking speed
-WALK_BASE = 1.3
+WALK_BASE = 1.3 
 # Rough estimate
 WHEELCHAIR_BASE = 0.6
 # Roughly 5 mph
