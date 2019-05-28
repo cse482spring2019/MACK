@@ -153,7 +153,7 @@ def cost_fun_generator(base_speed=WALK_BASE, downhill=0.1, blacklist_edges=[],
         return time
 
     def cost_fun_with_blacklist(u, v, d):
-	lon1, lat1 = precise_round(u.split(',')[0], 7), precise_round(u.split(',')[1], 7)
+        lon1, lat1 = precise_round(u.split(',')[0], 7), precise_round(u.split(',')[1], 7)
         lon2, lat2 = precise_round(v.split(',')[0], 7), precise_round(v.split(',')[1], 7)
 
         u = str(lon1) + ', ' + str(lat1)
@@ -165,6 +165,6 @@ def cost_fun_generator(base_speed=WALK_BASE, downhill=0.1, blacklist_edges=[],
             #print('\tblacklisted', u, v)
             return None
 
-	return cost_fun(u, v, d)
+        return cost_fun(u, v, d)
 
     return cost_fun_with_blacklist
