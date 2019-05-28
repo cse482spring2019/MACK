@@ -3,6 +3,7 @@ from datetime import datetime
 import math
 import humanized_opening_hours as hoh
 import pytz
+import sys
 
 ## Default base moving speeds for different modes. All in m/s.
 # Slightly lower than average walking speed
@@ -67,7 +68,7 @@ def cost_fun_generator(base_speed=WALK_BASE, downhill=0.1, blacklist_edges=[],
     k_up = find_k(uphill, INCLINE_IDEAL, DIVISOR)
 
     blacklist = set()
-    add_blacklist(blacklist, blacklist_edges)
+    add_blacklist(blacklist_edges, blacklist)
 
     if timestamp is None:
         date = datetime.now(pytz.timezone('US/Pacific'))
@@ -153,16 +154,21 @@ def cost_fun_generator(base_speed=WALK_BASE, downhill=0.1, blacklist_edges=[],
         return time
 
     def cost_fun_with_blacklist(u, v, d):
-        lon1, lat1 = precise_round(u.split(',')[0], 7), precise_round(u.split(',')[1], 7)
-        lon2, lat2 = precise_round(v.split(',')[0], 7), precise_round(v.split(',')[1], 7)
+
+        if(d.get("_u") != None):
+            lon1, lat1 = precise_round(d.get("_u").split(',')[0], 7), precise_round(d.get("_u").split(',')[1], 7)
+            lon2, lat2 = precise_round(d.get("_v").split(',')[0], 7), precise_round(d.get("_v").split(',')[1], 7)
+        else:
+            lon1, lat1 = precise_round(u.split(',')[0], 7), precise_round(u.split(',')[1], 7)
+            lon2, lat2 = precise_round(v.split(',')[0], 7), precise_round(v.split(',')[1], 7)
 
         u = str(lon1) + ', ' + str(lat1)
         v = str(lon2) + ', ' + str(lat2)
         if (u, v) in blacklist:
-            #print('\tblacklisted', u, v)
+            print('\tblacklisted', u, v)
             return None
         if (v, u) in blacklist:
-            #print('\tblacklisted', u, v)
+            print('\tblacklisted', u, v)
             return None
 
         return cost_fun(u, v, d)
