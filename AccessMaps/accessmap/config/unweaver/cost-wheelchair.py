@@ -50,7 +50,7 @@ def add_blacklist(blacklist, coord_list):
         blacklist.add((p2, p1))
 
 
-def cost_fun_generator(base_speed=WALK_BASE, downhill=0.1, blacklist_edges=[],
+def cost_fun_generator(base_speed=WALK_BASE, downhill=0.1, blacklist=[],
                        uphill=0.085, avoidCurbs=True, timestamp=None):
     """Calculates a cost-to-travel that balances distance vs. steepness vs.
     needing to cross the street.
@@ -67,8 +67,8 @@ def cost_fun_generator(base_speed=WALK_BASE, downhill=0.1, blacklist_edges=[],
     k_down = find_k(-downhill, INCLINE_IDEAL, DIVISOR)
     k_up = find_k(uphill, INCLINE_IDEAL, DIVISOR)
 
-    blacklist = set()
-    add_blacklist(blacklist_edges, blacklist)
+    blacklist_edges = set()
+    add_blacklist(blacklist, blacklist_edges)
 
     if timestamp is None:
         date = datetime.now(pytz.timezone('US/Pacific'))
@@ -154,7 +154,6 @@ def cost_fun_generator(base_speed=WALK_BASE, downhill=0.1, blacklist_edges=[],
         return time
 
     def cost_fun_with_blacklist(u, v, d):
-
         if(d.get("_u") != None):
             lon1, lat1 = precise_round(d.get("_u").split(',')[0], 7), precise_round(d.get("_u").split(',')[1], 7)
             lon2, lat2 = precise_round(d.get("_v").split(',')[0], 7), precise_round(d.get("_v").split(',')[1], 7)
@@ -164,13 +163,14 @@ def cost_fun_generator(base_speed=WALK_BASE, downhill=0.1, blacklist_edges=[],
 
         u = str(lon1) + ', ' + str(lat1)
         v = str(lon2) + ', ' + str(lat2)
-        if (u, v) in blacklist:
+        if (u, v) in blacklist_edges:
             print('\tblacklisted', u, v)
             return None
-        if (v, u) in blacklist:
+        if (v, u) in blacklist_edges:
             print('\tblacklisted', u, v)
             return None
 
+        print(u, v, 'not in blacklist:', blacklist_edges)
         return cost_fun(u, v, d)
 
     return cost_fun_with_blacklist
