@@ -16,6 +16,10 @@
     {
       "name": "timestamp",
       "type": "fields.Integer()"
+    },
+    {
+      "name": "blacklist",
+      "type": "fields.List(fields.Float(), required=False)"
     }
   ],
   "cost_function": "cost-wheelchair.py",
