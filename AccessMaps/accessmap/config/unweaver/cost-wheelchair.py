@@ -3,10 +3,11 @@ from datetime import datetime
 import math
 import humanized_opening_hours as hoh
 import pytz
+import sys
 
 ## Default base moving speeds for different modes. All in m/s.
 # Slightly lower than average walking speed
-WALK_BASE = 1.3
+WALK_BASE = 1.3 
 # Rough estimate
 WHEELCHAIR_BASE = 0.6
 # Roughly 5 mph
@@ -19,6 +20,15 @@ DIVISOR = 5
 INCLINE_IDEAL = -0.0087
 
 
+def precise_round(num, dec):
+    num = float(num)
+    num_sign = 1
+    if num < 0:
+        num_sign = -1
+
+    return round(num * (10 ** dec) + num_sign * 0.0001) / (10 ** dec)
+
+
 def find_k(g, m, n):
     return math.log(n) / abs(g - m)
 
@@ -27,7 +37,20 @@ def tobler(grade, k=3.5, m=INCLINE_IDEAL, base=WALK_BASE):
     # Modified to be in meters / second rather than km / h
     return base * math.exp(-k * abs(grade - m))
 
-def cost_fun_generator(base_speed=WALK_BASE, downhill=0.1,
+
+def add_blacklist(blacklist, coord_list):
+    for i in range(len(coord_list) // 4):
+        blon1 = coord_list[4 * i]
+        blat1 = coord_list[4 * i + 1]
+        blon2 = coord_list[4 * i + 2]
+        blat2 = coord_list[4 * i + 3]
+        p1 = str(precise_round(blon1, 7)) + ', ' + str(precise_round(blat1, 7))
+        p2 = str(precise_round(blon2, 7)) + ', ' + str(precise_round(blat2, 7))
+        blacklist.add((p1, p2))
+        blacklist.add((p2, p1))
+
+
+def cost_fun_generator(base_speed=WALK_BASE, downhill=0.1, blacklist=[],
                        uphill=0.085, avoidCurbs=True, timestamp=None):
     """Calculates a cost-to-travel that balances distance vs. steepness vs.
     needing to cross the street.
@@ -43,6 +66,9 @@ def cost_fun_generator(base_speed=WALK_BASE, downhill=0.1,
     """
     k_down = find_k(-downhill, INCLINE_IDEAL, DIVISOR)
     k_up = find_k(uphill, INCLINE_IDEAL, DIVISOR)
+
+    blacklist_edges = set()
+    add_blacklist(blacklist_edges, blacklist)
 
     if timestamp is None:
         date = datetime.now(pytz.timezone('US/Pacific'))
@@ -127,4 +153,21 @@ def cost_fun_generator(base_speed=WALK_BASE, downhill=0.1,
         # Return time estimate - this is currently the cost
         return time
 
-    return cost_fun
+    def cost_fun_with_blacklist(u, v, d):
+        if(d.get("_u") != None):
+            lon1, lat1 = precise_round(d.get("_u").split(',')[0], 7), precise_round(d.get("_u").split(',')[1], 7)
+            lon2, lat2 = precise_round(d.get("_v").split(',')[0], 7), precise_round(d.get("_v").split(',')[1], 7)
+        else:
+            lon1, lat1 = precise_round(u.split(',')[0], 7), precise_round(u.split(',')[1], 7)
+            lon2, lat2 = precise_round(v.split(',')[0], 7), precise_round(v.split(',')[1], 7)
+
+        u = str(lon1) + ', ' + str(lat1)
+        v = str(lon2) + ', ' + str(lat2)
+        if (u, v) in blacklist_edges:
+            return None
+        if (v, u) in blacklist_edges:
+            return None
+
+        return cost_fun(u, v, d)
+
+    return cost_fun_with_blacklist
