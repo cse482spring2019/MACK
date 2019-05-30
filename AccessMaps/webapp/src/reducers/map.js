@@ -100,6 +100,7 @@ const handleSelectedFeature = (state = defaultMap.selectedFeature, action) => {
     }
     case SET_ORIGIN:
     case SET_DESTINATION:
+    case SET_OBSTACLE:
     case SET_ORIGIN_DESTINATION:
       return null;
     default:

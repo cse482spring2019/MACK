@@ -26,7 +26,7 @@ export const TOGGLE_SETTING_PROFILE = "TOGGLE_SETTING_PROFILE";
 export const OPEN_REGION_SELECTIONS = "OPEN_REGION_SELECTIONS";
 export const CLOSE_REGION_SELECTIONS = "CLOSE_REGION_SELECTIONS";
 
-// Alternate route stuff
+// Rerouting and alternate routes around obstacle
 export const VIEW_ALTERNATE_ROUTE = "VIEW_ALTERNATE_ROUTE";
 export const SET_OBSTACLE = "SET_OBSTACLE";
 
@@ -722,14 +722,22 @@ export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
     newPayload = [];
     newPayload.push(closestEdge);
   }
+
   dispatch({
     type: SET_OBSTACLE,
-    payload: newPayload
+    payload: newPayload,
+    meta: {
+      analytics: {
+        type: "set-obstacle",
+        payload: { lon, lat, name }
+      }
+    }
   });
 
-  dispatch({ type: CLOSE_DIRECTIONS });
-  dispatch({ type: VIEW_DIRECTIONS });
+  // dispatch({ type: CLOSE_DIRECTIONS });
+  // dispatch({ type: VIEW_DIRECTIONS });
   routeIfValid(dispatch, getState);
+
   // dispatch({
   //   type: CLOSE_DIRECTIONS,
   //   payload: routeResult,

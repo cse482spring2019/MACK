@@ -23,21 +23,18 @@ const Waypoints = props => {
     );
   }
 
+  let obstacleComponent = null;
+  if (reported) {
+    obstacleComponent = (
+      <MapMarker coordinates={reported.geometry.coordinates} label="!" />
+    );
+  }
+
   let poiComponent = null;
   if (selectedFeature) {
     poiComponent = <MapMarker coordinates={selectedFeature.location} />;
   } else if (poi) {
     poiComponent = <MapMarker coordinates={poi.geometry.coordinates} />;
-  }
-
-  let obstacleComponent = null;
-  if (reported) {
-    obstacleComponent = (
-      <MapMarker
-        coordinates={obstacleComponent.geometry.coordinates}
-        label="!"
-      />
-    );
   }
 
   return (
