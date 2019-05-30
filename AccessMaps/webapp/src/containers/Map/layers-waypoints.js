@@ -7,7 +7,7 @@ import { pointFeatureNoProps } from "prop-schema";
 import pointFeature from "utils/point-feature";
 
 const Waypoints = props => {
-  const { destination, origin, poi, selectedFeature } = props;
+  const { destination, origin, poi, selectedFeature, reported } = props;
 
   let originComponent = null;
   if (origin) {
@@ -30,11 +30,22 @@ const Waypoints = props => {
     poiComponent = <MapMarker coordinates={poi.geometry.coordinates} />;
   }
 
+  let obstacleComponent = null;
+  if (reported) {
+    obstacleComponent = (
+      <MapMarker
+        coordinates={obstacleComponent.geometry.coordinates}
+        label="!"
+      />
+    );
+  }
+
   return (
     <React.Fragment>
       {originComponent}
       {destinationComponent}
       {poiComponent}
+      {obstacleComponent}
     </React.Fragment>
   );
 };
@@ -43,6 +54,7 @@ Waypoints.propTypes = {
   destination: pointFeatureNoProps,
   origin: pointFeatureNoProps,
   poi: pointFeatureNoProps,
+  reported: pointFeatureNoProps,
   selectedFeature: PropTypes.shape({
     layer: PropTypes.string,
     layerName: PropTypes.string,
@@ -55,6 +67,7 @@ Waypoints.defaultProps = {
   destination: null,
   origin: null,
   poi: null,
+  reported: null,
   selectedFeature: null
 };
 
@@ -70,12 +83,13 @@ const mapStateToProps = state => {
     }
   });
 
-  const { poi, origin, destination } = selectedWaypoints;
+  const { poi, origin, destination, reported } = selectedWaypoints;
 
   return {
     destination,
     origin,
     poi,
+    reported,
     selectedFeature: map.selectedFeature
   };
 };

@@ -1,0 +1,64 @@
+Activating privacy features... done.
+
+Serving HTTP on port 2015 
+http://localhost:2015
+http://localhost:2015/tiles
+
+2019/05/24 22:23:10 [INFO][FileStorage:/root/.caddy] Started certificate maintenance routine
+2019/05/24 22:23:10 [INFO] Serving http://localhost:2015 
+2019/05/24 22:23:10 [INFO] Serving http://localhost:2015/tiles 
+172.18.0.1 - - [24/May/2019:22:23:38 +0000] "GET /tiles/tilejson/pedestrian.json HTTP/1.1" 200 1327 - /tiles/tilejson/pedestrian.json -> /tilejson/pedestrian.json
+172.18.0.1 - - [24/May/2019:22:23:38 +0000] "GET /tiles/tilejson/regions.json HTTP/1.1" 200 586 - /tiles/tilejson/regions.json -> /tilejson/regions.json
+172.18.0.1 - - [24/May/2019:22:23:39 +0000] "GET /api/v1/routing/directions/wheelchair.json?lon1=-122.3352664&lat1=47.6044702&lon2=-122.330138&lat2=47.604991&uphill=0.08&downhill=0.1&avoidCurbs=1&timestamp=1558736617071 HTTP/1.1" 500 220
+172.18.0.1 - - [24/May/2019:22:23:39 +0000] "GET /tiles/pedestrian/14/2623/5722.pbf HTTP/1.1" 204 0 - /tiles/pedestrian/14/2623/5722.pbf -> /nocontent
+172.18.0.1 - - [24/May/2019:22:23:39 +0000] "GET /tiles/pedestrian/14/2624/5722.pbf HTTP/1.1" 304 0 - /tiles/pedestrian/14/2624/5722.pbf -> /pedestrian/14/2624/5722.pbf
+172.18.0.1 - - [24/May/2019:22:23:39 +0000] "GET /tiles/pedestrian/14/2624/5721.pbf HTTP/1.1" 304 0 - /tiles/pedestrian/14/2624/5721.pbf -> /pedestrian/14/2624/5721.pbf
+172.18.0.1 - - [24/May/2019:22:23:39 +0000] "GET /tiles/pedestrian/14/2623/5721.pbf HTTP/1.1" 304 0 - /tiles/pedestrian/14/2623/5721.pbf -> /pedestrian/14/2623/5721.pbf
+172.18.0.1 - - [24/May/2019:22:23:39 +0000] "GET /tiles/regions/14/2623/5722.pbf HTTP/1.1" 304 0 - /tiles/regions/14/2623/5722.pbf -> /regions/14/2623/5722.pbf
+172.18.0.1 - - [24/May/2019:22:23:39 +0000] "GET /tiles/regions/14/2624/5722.pbf HTTP/1.1" 304 0 - /tiles/regions/14/2624/5722.pbf -> /regions/14/2624/5722.pbf
+172.18.0.1 - - [24/May/2019:22:23:39 +0000] "GET /tiles/regions/14/2624/5721.pbf HTTP/1.1" 304 0 - /tiles/regions/14/2624/5721.pbf -> /regions/14/2624/5721.pbf
+172.18.0.1 - - [24/May/2019:22:23:39 +0000] "GET /tiles/regions/14/2623/5721.pbf HTTP/1.1" 304 0 - /tiles/regions/14/2623/5721.pbf -> /regions/14/2623/5721.pbf
+172.18.0.1 - - [24/May/2019:22:23:44 +0000] "GET /tiles/pedestrian/14/2625/5721.pbf HTTP/1.1" 304 0 - /tiles/pedestrian/14/2625/5721.pbf -> /pedestrian/14/2625/5721.pbf
+172.18.0.1 - - [24/May/2019:22:23:44 +0000] "GET /tiles/pedestrian/14/2625/5722.pbf HTTP/1.1" 304 0 - /tiles/pedestrian/14/2625/5722.pbf -> /pedestrian/14/2625/5722.pbf
+172.18.0.1 - - [24/May/2019:22:23:44 +0000] "GET /tiles/regions/14/2625/5722.pbf HTTP/1.1" 304 0 - /tiles/regions/14/2625/5722.pbf -> /regions/14/2625/5722.pbf
+172.18.0.1 - - [24/May/2019:22:23:44 +0000] "GET /tiles/regions/14/2625/5721.pbf HTTP/1.1" 304 0 - /tiles/regions/14/2625/5721.pbf -> /regions/14/2625/5721.pbf
+172.18.0.1 - - [24/May/2019:22:23:47 +0000] "GET /api/v1/routing/directions/wheelchair.json?lon1=-122.3352664&lat1=47.6044702&lon2=-122.33123232271402&lat2=47.60597482472062&uphill=0.08&downhill=0.1&avoidCurbs=1&timestamp=1558736617071 HTTP/1.1" 200 64
+172.18.0.1 - - [24/May/2019:22:23:51 +0000] "GET /api/v1/routing/directions/wheelchair.json?lon1=-122.3352664&lat1=47.6044702&lon2=-122.33344246293922&lat2=47.60523698685475&uphill=0.08&downhill=0.1&avoidCurbs=1&timestamp=1558736617071 HTTP/1.1" 200 64
+172.18.0.1 - - [24/May/2019:22:23:54 +0000] "GET /api/v1/routing/directions/wheelchair.json?lon1=-122.3352664&lat1=47.6044702&lon2=-122.33423252008333&lat2=47.603993637386&uphill=0.08&downhill=0.1&avoidCurbs=1&timestamp=1558736617071 HTTP/1.1" 500 220
+172.18.0.1 - - [24/May/2019:22:24:37 +0000] "GET /tiles/pedestrian/14/2623/5722.pbf HTTP/1.1" 204 0 - /tiles/pedestrian/14/2623/5722.pbf -> /nocontent
+172.18.0.1 - - [24/May/2019:22:24:57 +0000] "GET /api/v1/routing/directions/wheelchair.json?lon1=-122.32494522476793&lat1=47.60727686609701&lon2=-122.32269216918684&lat2=47.60687179000206&uphill=0.08&downhill=0.1&avoidCurbs=1&timestamp=1558736674681 HTTP/1.1" 500 220
+2019/05/24 22:31:22 [INFO] SIGTERM: Shutting down servers then terminating
+2019/05/24 22:31:22 [INFO][FileStorage:/root/.caddy] Stopped certificate maintenance routine
+2019/05/24 22:31:51 [INFO][FileStorage:/root/.caddy] Started certificate maintenance routine
+Activating privacy features... done.
+
+Serving HTTP on port 2015 
+http://localhost:2015
+http://localhost:2015/tiles
+
+2019/05/24 22:31:51 [INFO] Serving http://localhost:2015 
+2019/05/24 22:31:51 [INFO] Serving http://localhost:2015/tiles 
+172.18.0.1 - - [24/May/2019:22:32:07 +0000] "GET /api/v1/routing/directions/wheelchair.json?lon1=-122.3249452&lat1=47.6072769&lon2=-122.3226922&lat2=47.6068718&uphill=0.08&downhill=0.1&avoidCurbs=1&timestamp=1558737125319 HTTP/1.1" 500 220
+172.18.0.1 - - [24/May/2019:22:32:43 +0000] "GET /api/v1/routing/directions/wheelchair.json?lon1=-122.3249452&lat1=47.6072769&lon2=-122.3226922&lat2=47.6068718&uphill=0.08&downhill=0.1&avoidCurbs=1&timestamp=1558737160620 HTTP/1.1" 500 220
+2019/05/24 22:44:07 [INFO] SIGTERM: Shutting down servers then terminating
+2019/05/24 22:44:07 [INFO][FileStorage:/root/.caddy] Stopped certificate maintenance routine
+Activating privacy features... done.
+2019/05/24 22:45:45 [INFO][FileStorage:/root/.caddy] Started certificate maintenance routine
+
+Serving HTTP on port 2015 
+http://localhost:2015
+http://localhost:2015/tiles
+
+2019/05/24 22:45:45 [INFO] Serving http://localhost:2015 
+2019/05/24 22:45:45 [INFO] Serving http://localhost:2015/tiles 
+172.18.0.1 - - [24/May/2019:22:45:59 +0000] "GET /tiles/tilejson/pedestrian.json HTTP/1.1" 304 0 - /tiles/tilejson/pedestrian.json -> /tilejson/pedestrian.json
+172.18.0.1 - - [24/May/2019:22:45:59 +0000] "GET /tiles/tilejson/regions.json HTTP/1.1" 304 0 - /tiles/tilejson/regions.json -> /tilejson/regions.json
+172.18.0.1 - - [24/May/2019:22:45:59 +0000] "GET /tiles/pedestrian/14/2623/5722.pbf HTTP/1.1" 204 0 - /tiles/pedestrian/14/2623/5722.pbf -> /nocontent
+172.18.0.1 - - [24/May/2019:22:45:59 +0000] "GET /tiles/pedestrian/14/2623/5721.pbf HTTP/1.1" 304 0 - /tiles/pedestrian/14/2623/5721.pbf -> /pedestrian/14/2623/5721.pbf
+172.18.0.1 - - [24/May/2019:22:45:59 +0000] "GET /tiles/pedestrian/14/2624/5721.pbf HTTP/1.1" 304 0 - /tiles/pedestrian/14/2624/5721.pbf -> /pedestrian/14/2624/5721.pbf
+172.18.0.1 - - [24/May/2019:22:45:59 +0000] "GET /tiles/pedestrian/14/2624/5722.pbf HTTP/1.1" 304 0 - /tiles/pedestrian/14/2624/5722.pbf -> /pedestrian/14/2624/5722.pbf
+172.18.0.1 - - [24/May/2019:22:46:00 +0000] "GET /tiles/regions/14/2623/5721.pbf HTTP/1.1" 304 0 - /tiles/regions/14/2623/5721.pbf -> /regions/14/2623/5721.pbf
+172.18.0.1 - - [24/May/2019:22:46:00 +0000] "GET /tiles/regions/14/2624/5721.pbf HTTP/1.1" 304 0 - /tiles/regions/14/2624/5721.pbf -> /regions/14/2624/5721.pbf
+172.18.0.1 - - [24/May/2019:22:46:00 +0000] "GET /tiles/regions/14/2624/5722.pbf HTTP/1.1" 304 0 - /tiles/regions/14/2624/5722.pbf -> /regions/14/2624/5722.pbf
+172.18.0.1 - - [24/May/2019:22:46:00 +0000] "GET /tiles/regions/14/2623/5722.pbf HTTP/1.1" 304 0 - /tiles/regions/14/2623/5722.pbf -> /regions/14/2623/5722.pbf
+172.18.0.1 - - [24/May/2019:22:46:20 +0000] "GET /api/v1/routing/directions/wheelchair.json?lon1=-122.33353902241862&lat1=47.60509231148035&lon2=-122.3305564059927&lat2=47.605439531558034&uphill=0.08&downhill=0.1&avoidCurbs=1&timestamp=1558737957119 HTTP/1.1" 200 64
