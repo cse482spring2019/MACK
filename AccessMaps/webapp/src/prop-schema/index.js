@@ -54,6 +54,7 @@ export const routeResult = PropTypes.shape({
   ]),
   origin: pointFeatureNoProps,
   destination: pointFeatureNoProps,
+  obstacle: pointFeatureNoProps,
   routes: PropTypes.arrayOf(lineFeatureCollection),
   waypoints: PropTypes.arrayOf(pointFeatureNoProps)
 });
