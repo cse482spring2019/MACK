@@ -68,7 +68,7 @@ def cost_fun_generator(base_speed=WALK_BASE, downhill=0.1, blacklist=[],
     k_up = find_k(uphill, INCLINE_IDEAL, DIVISOR)
 
     blacklist_edges = set()
-    add_blacklist(blacklist, blacklist_edges)
+    add_blacklist(blacklist_edges, blacklist)
 
     if timestamp is None:
         date = datetime.now(pytz.timezone('US/Pacific'))
@@ -164,13 +164,10 @@ def cost_fun_generator(base_speed=WALK_BASE, downhill=0.1, blacklist=[],
         u = str(lon1) + ', ' + str(lat1)
         v = str(lon2) + ', ' + str(lat2)
         if (u, v) in blacklist_edges:
-            print('\tblacklisted', u, v)
             return None
         if (v, u) in blacklist_edges:
-            print('\tblacklisted', u, v)
             return None
 
-        print(u, v, 'not in blacklist:', blacklist_edges)
         return cost_fun(u, v, d)
 
     return cost_fun_with_blacklist

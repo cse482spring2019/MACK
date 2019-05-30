@@ -18,7 +18,7 @@ RUN git clone https://github.com/nbolten/unweaver.git unweaver
 
 WORKDIR /install/unweaver
 
-RUN git checkout $GIT_HASH \
+RUN git checkout $GIT_HASH && git reset --hard\ 
  && poetry install
 
 RUN poetry add osm-humanized-opening-hours \
