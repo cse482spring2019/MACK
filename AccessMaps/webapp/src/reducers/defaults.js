@@ -79,6 +79,6 @@ export const defaultView = {
 export const defaultWaypoints = {
   destination: null,
   origin: null,
-  reported: null,
+  obstacle: null,
   poi: null
 };

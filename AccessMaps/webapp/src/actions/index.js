@@ -890,7 +890,12 @@ export const closeDirections = routeResult => ({
 });
 
 export const confirmingObstacleLocation = () => ({
-  type: CONFIRM_OBSTACLE_LOCATION
+  type: CONFIRM_OBSTACLE_LOCATION,
+  meta: {
+    analytics: {
+      type: "confirm-obstacle-location"
+    }
+  }
 });
 
 export const viewDirections = routeResult => ({

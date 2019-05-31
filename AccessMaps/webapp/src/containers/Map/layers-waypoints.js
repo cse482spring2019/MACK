@@ -7,7 +7,7 @@ import { pointFeatureNoProps } from "prop-schema";
 import pointFeature from "utils/point-feature";
 
 const Waypoints = props => {
-  const { destination, origin, poi, selectedFeature, reported } = props;
+  const { destination, origin, poi, selectedFeature, obstacle } = props;
 
   let originComponent = null;
   if (origin) {
@@ -24,9 +24,9 @@ const Waypoints = props => {
   }
 
   let obstacleComponent = null;
-  if (reported) {
+  if (obstacle) {
     obstacleComponent = (
-      <MapMarker coordinates={reported.geometry.coordinates} label="!" />
+      <MapMarker coordinates={obstacle.geometry.coordinates} label="!" />
     );
   }
 
@@ -51,7 +51,7 @@ Waypoints.propTypes = {
   destination: pointFeatureNoProps,
   origin: pointFeatureNoProps,
   poi: pointFeatureNoProps,
-  reported: pointFeatureNoProps,
+  obstacle: pointFeatureNoProps,
   selectedFeature: PropTypes.shape({
     layer: PropTypes.string,
     layerName: PropTypes.string,
@@ -64,7 +64,7 @@ Waypoints.defaultProps = {
   destination: null,
   origin: null,
   poi: null,
-  reported: null,
+  obstacle: null,
   selectedFeature: null
 };
 
@@ -80,13 +80,13 @@ const mapStateToProps = state => {
     }
   });
 
-  const { poi, origin, destination, reported } = selectedWaypoints;
+  const { poi, origin, destination, obstacle } = selectedWaypoints;
 
   return {
     destination,
     origin,
     poi,
-    reported,
+    obstacle,
     selectedFeature: map.selectedFeature
   };
 };

@@ -22,7 +22,6 @@ const handleWaypoints = (state = defaults, action) => {
       return {
         poi: null,
         origin: null,
-        reported: null,
         destination: null
       };
     case SET_POI:
@@ -45,7 +44,7 @@ const handleWaypoints = (state = defaults, action) => {
     case SET_OBSTACLE:
       return {
         ...state,
-        reported: action.payload,
+        obstacle: action.payload,
         poi: null
       };
     case SET_ORIGIN_DESTINATION:
@@ -78,7 +77,7 @@ const handleWaypoints = (state = defaults, action) => {
         !action.payload.route.name === "directions"
       ) {
         // We've exited directions mode - clear out origin/destination
-        return { ...state, origin: null, destination: null, reported: null };
+        return { ...state, origin: null, destination: null };
       }
       // If this is 'rehydrating' directions mode from the URL, catch and
       // update

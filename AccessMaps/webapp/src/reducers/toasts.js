@@ -71,7 +71,8 @@ export default (state = defaults, action) => {
           toasts.push("Could not set obstacle: server error");
           return toasts;
       }
-      toasts.push("obstacle reported");
+      //toasts.push("Obstacle recorded!");
+      toasts.push("Rerouting...");
       return toasts;
     default:
       return state;
