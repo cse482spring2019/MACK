@@ -57,6 +57,7 @@ class OmniCard extends React.PureComponent {
   render() {
     const {
       actions,
+      confirmingObstacleLocation,
       destination,
       drawerVisible,
       fetchingRoute,
@@ -103,6 +104,17 @@ class OmniCard extends React.PureComponent {
     if (!isMobile && viewingAlternate) {
       return (
         <Card className="omnicard alternate--mode">
+          <AlternateRoute
+            onClose={() => actions.closeDirections(routeResult)}
+            routeResult={routeResult}
+          />
+        </Card>
+      );
+    }
+
+    if (!isMobile && confirmingObstacleLocation) {
+      return (
+        <Card className="omnicard">
           <AlternateRoute
             onClose={() => actions.closeDirections(routeResult)}
             routeResult={routeResult}
@@ -330,6 +342,7 @@ class OmniCard extends React.PureComponent {
 
 OmniCard.propTypes = {
   actions: PropTypes.objectOf(PropTypes.func).isRequired,
+  confirmingObstacleLocation: PropTypes.bool,
   destination: pointFeature({ name: PropTypes.string }),
   drawerVisible: PropTypes.bool.isRequired,
   fetchingRoute: PropTypes.bool,
@@ -348,6 +361,7 @@ OmniCard.propTypes = {
 };
 
 OmniCard.defaultProps = {
+  confirmingObstacleLocation: false,
   destination: null,
   origin: null,
   fetchingRoute: false,
@@ -390,6 +404,7 @@ const mapStateToProps = state => {
   }
 
   return {
+    confirmingObstacleLocation: activities.confirmingObstacleLocation,
     destination: waypoints.destination,
     drawerVisible: activities.drawerVisible,
     fetchingRoute: route.fetchingRoute,

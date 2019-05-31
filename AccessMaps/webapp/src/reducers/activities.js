@@ -6,6 +6,8 @@ import {
   CLOSE_DIRECTIONS,
   CLOSE_REGION_SELECTIONS,
   CLOSE_SIGNUP_PROMPT,
+  CLEAR_SELECTED_FEATURES,
+  CONFIRM_OBSTACLE_LOCATION,
   HIDE_DRAWER,
   OPEN_REGION_SELECTIONS,
   OPEN_SIGNUP_PROMPT,
@@ -21,6 +23,20 @@ import {
 } from "actions";
 
 import { defaultActivities as defaults } from "reducers/defaults";
+
+const handleConfirmingObstacleLocation = (
+  state = defaults.confirmingObstacleLocation,
+  action
+) => {
+  switch (action.type) {
+    case CONFIRM_OBSTACLE_LOCATION:
+      return true;
+    case CLEAR_SELECTED_FEATURES:
+      return false;
+    default:
+      return state;
+  }
+};
 
 const handleDrawerVisible = (state = defaults.drawerVisible, action) => {
   switch (action.type) {
@@ -128,6 +144,7 @@ const handleViewingAlternate = (state = defaults.viewingAlternate, action) => {
 };
 
 export default combineReducers({
+  confirmingObstacleLocation: handleConfirmingObstacleLocation,
   drawerVisible: handleDrawerVisible,
   promptingSignup: handlePromptingSignup,
   selectingRegion: handleSelectingRegion,

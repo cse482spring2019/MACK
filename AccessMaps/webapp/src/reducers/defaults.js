@@ -3,6 +3,7 @@ import cloneObject from "utils/clone-object";
 import regions from "constants/regions";
 
 export const defaultActivities = {
+  confirmingObstacleLocation: false,
   drawerVisible: false,
   promptingSignup: false,
   selectingRegion: false,

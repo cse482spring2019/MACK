@@ -29,6 +29,7 @@ export const CLOSE_REGION_SELECTIONS = "CLOSE_REGION_SELECTIONS";
 // Alternate route stuff
 export const VIEW_ALTERNATE_ROUTE = "VIEW_ALTERNATE_ROUTE";
 export const SET_OBSTACLE = "SET_OBSTACLE";
+export const CONFIRM_OBSTACLE_LOCATION = "CONFIRM_OBSTACLE_LOCATION";
 
 // Routing profile settings
 export const SET_SPEED = "SET_SPEED";
@@ -878,6 +879,10 @@ export const closeDirections = routeResult => ({
       type: "close-directions"
     }
   }
+});
+
+export const confirmingObstacleLocation = () => ({
+  type: CONFIRM_OBSTACLE_LOCATION
 });
 
 export const viewDirections = routeResult => ({
