@@ -709,10 +709,14 @@ export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
   lat = parseFloat(precise_round(newOrigin[1], 6));
   name = lon + "&blacklist=" + lat;
 
+  /* TODO: 
+  SET_ORIGIN -> SET OBSTACLE, which is better?
+  SET_OBSTACLE: matches AccessMaps original functionality, shows entire route
+  SET_ORIGIN: Once user reports an obstacle, we assume that they're near the spot, and we reset their origin
   dispatch({
-    type: SET_ORIGIN,
+    type: SET_OBSTACLE,
     payload: { lon, lat, name }
-  });
+  });*/
 
   var newPayload = null;
   if (state.route.blacklistedEdges != null) {
@@ -735,20 +739,7 @@ export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
     }
   });
 
-  // dispatch({ type: CLOSE_DIRECTIONS });
-  // dispatch({ type: VIEW_DIRECTIONS });
   routeIfValid(dispatch, getState);
-
-  // dispatch({
-  //   type: CLOSE_DIRECTIONS,
-  //   payload: routeResult,
-  //   meta: {
-  //     analytics: {
-  //       type: "close-directions"
-  //     }
-  //   }
-  // });
-  // Close viewingAlternate window in actions after obstacle is set
 };
 
 function precise_round(num, dec) {

@@ -22,7 +22,8 @@ const handleWaypoints = (state = defaults, action) => {
       return {
         poi: null,
         origin: null,
-        destination: null
+        destination: null,
+        obstacle: null
       };
     case SET_POI:
       return {
@@ -44,7 +45,7 @@ const handleWaypoints = (state = defaults, action) => {
     case SET_OBSTACLE:
       return {
         ...state,
-        obstacle: action.payload,
+        obstacle: action.payload.poi,
         poi: null
       };
     case SET_ORIGIN_DESTINATION:
