@@ -54,9 +54,16 @@ const getFeatureType = properties => {
 };
 
 const FeatureCard = props => {
-  const { actions, selectedFeature, viewingAlternate } = props;
+  console.log("FEATURECARD WAS CALLED");
+  const {
+    actions,
+    confirmingObstacleLocation,
+    selectedFeature,
+    viewingAlternate
+  } = props;
 
   if (!selectedFeature) return null;
+  console.log("SELECTED FEATURE CHANGED");
   if (!selectedFeature.properties) selectedFeature.properties = {};
 
   const { properties } = selectedFeature;
@@ -94,6 +101,123 @@ const FeatureCard = props => {
         markedCrossing = "Unknown";
         break;
     }
+  }
+
+  var cardToUse;
+  if (confirmingObstacleLocation) {
+    cardToUse = (
+      <CardActions>
+        <Button
+          flat
+          primary
+          onClick={() => {
+            actions.clearSelectedFeatures();
+            actions.setObstacle(
+              selectedFeature.location[0],
+              selectedFeature.location[1],
+              [
+                selectedFeature.location[1].toFixed(6),
+                selectedFeature.location[0].toFixed(6)
+              ].join(", ")
+            );
+          }}
+        >
+          Confirm Obstacle Report
+        </Button>
+      </CardActions>
+    );
+  } else if (viewingAlternate) {
+    cardToUse = (
+      <CardActions>
+        <Button
+          flat
+          primary
+          onClick={() => {
+            actions.setObstacle(
+              selectedFeature.location[0],
+              selectedFeature.location[1],
+              [
+                selectedFeature.location[1].toFixed(6),
+                selectedFeature.location[0].toFixed(6)
+              ].join(", ")
+            );
+          }}
+        >
+          Report Obstacle
+        </Button>
+        {/* TODO: REMOVE OR LEAVE for demo?*/}
+        <Button
+          flat
+          primary
+          onClick={() => {
+            actions.setOrigin(
+              selectedFeature.location[0],
+              selectedFeature.location[1],
+              [
+                selectedFeature.location[1].toFixed(6),
+                selectedFeature.location[0].toFixed(6)
+              ].join(", ")
+            );
+          }}
+        >
+          Set new origin
+        </Button>
+      </CardActions>
+    );
+  } else {
+    cardToUse = (
+      <CardActions>
+        <Button
+          flat
+          primary
+          onClick={() => {
+            actions.setOrigin(
+              selectedFeature.location[0],
+              selectedFeature.location[1],
+              [
+                selectedFeature.location[1].toFixed(6),
+                selectedFeature.location[0].toFixed(6)
+              ].join(", ")
+            );
+          }}
+        >
+          Route from here
+        </Button>
+        <Button
+          flat
+          primary
+          onClick={() => {
+            actions.setDestination(
+              selectedFeature.location[0],
+              selectedFeature.location[1],
+              [
+                selectedFeature.location[1].toFixed(6),
+                selectedFeature.location[0].toFixed(6)
+              ].join(", ")
+            );
+          }}
+        >
+          Route to here
+        </Button>
+        <Button
+          flat
+          primary
+          onClick={() => {
+            // actions.setObstacle(
+            //   selectedFeature.location[0],
+            //   selectedFeature.location[1],
+            //   [
+            //     selectedFeature.location[1].toFixed(6),
+            //     selectedFeature.location[0].toFixed(6)
+            //   ].join(", ")
+            // );
+            actions.confirmingObstacleLocation();
+          }}
+        >
+          Report Obstacle
+        </Button>
+      </CardActions>
+    );
   }
 
   return (
@@ -142,100 +266,14 @@ const FeatureCard = props => {
           ) : null}
         </TableBody>
       </DataTable>
-      {viewingAlternate ? (
-        <CardActions>
-          <Button
-            flat
-            primary
-            onClick={() => {
-              actions.setObstacle(
-                selectedFeature.location[0],
-                selectedFeature.location[1],
-                [
-                  selectedFeature.location[1].toFixed(6),
-                  selectedFeature.location[0].toFixed(6)
-                ].join(", ")
-              );
-            }}
-          >
-            Report Obstacle
-          </Button>
-          {/* TODO: REMOVE OR LEAVE for demo?*/}
-          <Button
-            flat
-            primary
-            onClick={() => {
-              actions.setOrigin(
-                selectedFeature.location[0],
-                selectedFeature.location[1],
-                [
-                  selectedFeature.location[1].toFixed(6),
-                  selectedFeature.location[0].toFixed(6)
-                ].join(", ")
-              );
-            }}
-          >
-            Set new origin
-          </Button>
-        </CardActions>
-      ) : (
-        <CardActions>
-          <Button
-            flat
-            primary
-            onClick={() => {
-              actions.setOrigin(
-                selectedFeature.location[0],
-                selectedFeature.location[1],
-                [
-                  selectedFeature.location[1].toFixed(6),
-                  selectedFeature.location[0].toFixed(6)
-                ].join(", ")
-              );
-            }}
-          >
-            Route from here
-          </Button>
-          <Button
-            flat
-            primary
-            onClick={() => {
-              actions.setDestination(
-                selectedFeature.location[0],
-                selectedFeature.location[1],
-                [
-                  selectedFeature.location[1].toFixed(6),
-                  selectedFeature.location[0].toFixed(6)
-                ].join(", ")
-              );
-            }}
-          >
-            Route to here
-          </Button>
-          <Button
-            flat
-            primary
-            onClick={() => {
-              actions.setObstacle(
-                selectedFeature.location[0],
-                selectedFeature.location[1],
-                [
-                  selectedFeature.location[1].toFixed(6),
-                  selectedFeature.location[0].toFixed(6)
-                ].join(", ")
-              );
-            }}
-          >
-            Report Obstacle
-          </Button>
-        </CardActions>
-      )}
+      {cardToUse}
     </Card>
   );
 };
 
 FeatureCard.propTypes = {
   actions: PropTypes.objectOf(PropTypes.func).isRequired,
+  confirmingObstacleLocation: PropTypes.bool,
   selectedFeature: PropTypes.shape({
     layer: PropTypes.string,
     layerName: PropTypes.string,
@@ -246,11 +284,13 @@ FeatureCard.propTypes = {
 };
 
 FeatureCard.defaultProps = {
+  confirmingObstacleLocation: false,
   selectedFeature: null,
   viewingAlternate: false
 };
 
 const mapStateToProps = state => ({
+  confirmingObstacleLocation: state.activities.confirmingObstacleLocation,
   selectedFeature: state.map.selectedFeature,
   viewingAlternate: state.activities.viewingAlternate
 });
