@@ -26,19 +26,17 @@ const Waypoints = props => {
   let obstacleComponent = null;
   if (obstacle) {
     obstacleComponent = (
-      <MapMarker coordinates={selectedFeature.geometry.coordinates} label="!" />
+      <MapMarker coordinates={obstacle.geometry.coordinates} label="!" />
     );
   }
 
   let poiComponent = null;
   if (selectedFeature) {
     poiComponent = (
-      <MapMarker coordinates={selectedFeature.location} label="V" />
+      <MapMarker coordinates={selectedFeature.location} label="!" />
     );
   } else if (poi) {
-    poiComponent = (
-      <MapMarker coordinates={poi.geometry.coordinates} label="poi" />
-    );
+    poiComponent = <MapMarker coordinates={poi.geometry.coordinates} />;
   }
 
   return (

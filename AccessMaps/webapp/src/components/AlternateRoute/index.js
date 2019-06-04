@@ -18,7 +18,7 @@ const AlternateRoute = props => {
   return (
     <React.Fragment>
       <Toolbar
-        title="Alternate Route"
+        title="Confirm Obstacle"
         actions={[
           <Button key="directions-close-button" icon onClick={onClose}>
             close
@@ -27,8 +27,7 @@ const AlternateRoute = props => {
       />
       <Card>
         <CardText className="directions--step">
-          If you want to request a rereoute, please tap the location of the
-          obstruction on the map.
+          Please confirm this is the correct street.
         </CardText>
       </Card>
     </React.Fragment>
