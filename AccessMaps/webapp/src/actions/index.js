@@ -26,7 +26,7 @@ export const TOGGLE_SETTING_PROFILE = "TOGGLE_SETTING_PROFILE";
 export const OPEN_REGION_SELECTIONS = "OPEN_REGION_SELECTIONS";
 export const CLOSE_REGION_SELECTIONS = "CLOSE_REGION_SELECTIONS";
 
-// Alternate route stuff
+// Rerouting and alternate routes around obstacle
 export const VIEW_ALTERNATE_ROUTE = "VIEW_ALTERNATE_ROUTE";
 export const SET_OBSTACLE = "SET_OBSTACLE";
 export const CONFIRM_OBSTACLE_LOCATION = "CONFIRM_OBSTACLE_LOCATION";
@@ -709,10 +709,14 @@ export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
   lat = parseFloat(precise_round(newOrigin[1], 6));
   name = lon + "&blacklist=" + lat;
 
+  /* TODO: 
+  SET_ORIGIN -> SET OBSTACLE, which is better?
+  SET_OBSTACLE: matches AccessMaps original functionality, shows entire route
+  SET_ORIGIN: Once user reports an obstacle, we assume that they're near the spot, and we reset their origin
   dispatch({
-    type: SET_ORIGIN,
+    type: SET_OBSTACLE,
     payload: { lon, lat, name }
-  });
+  });*/
 
   var newPayload = null;
   if (state.route.blacklistedEdges != null) {
@@ -723,24 +727,19 @@ export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
     newPayload = [];
     newPayload.push(closestEdge);
   }
+
   dispatch({
     type: SET_OBSTACLE,
-    payload: newPayload
+    payload: newPayload,
+    meta: {
+      analytics: {
+        type: "set-obstacle",
+        payload: { lon, lat, name }
+      }
+    }
   });
 
-  dispatch({ type: CLOSE_DIRECTIONS });
-  dispatch({ type: VIEW_DIRECTIONS });
   routeIfValid(dispatch, getState);
-  // dispatch({
-  //   type: CLOSE_DIRECTIONS,
-  //   payload: routeResult,
-  //   meta: {
-  //     analytics: {
-  //       type: "close-directions"
-  //     }
-  //   }
-  // });
-  // Close viewingAlternate window in actions after obstacle is set
 };
 
 function precise_round(num, dec) {
@@ -882,7 +881,12 @@ export const closeDirections = routeResult => ({
 });
 
 export const confirmingObstacleLocation = () => ({
-  type: CONFIRM_OBSTACLE_LOCATION
+  type: CONFIRM_OBSTACLE_LOCATION,
+  meta: {
+    analytics: {
+      type: "confirm-obstacle-location"
+    }
+  }
 });
 
 export const viewDirections = routeResult => ({

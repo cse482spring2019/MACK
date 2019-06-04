@@ -63,7 +63,16 @@ export default (state = defaults, action) => {
           return toasts;
       }
     case SET_OBSTACLE:
-      toasts.push("obstacle recorded");
+      switch (action.payload.error) {
+        case "500":
+          toasts.push("Could not set obstacle");
+          return toasts;
+        case "504":
+          toasts.push("Could not set obstacle: server error");
+          return toasts;
+      }
+      //toasts.push("Obstacle recorded!");
+      toasts.push("Rerouting...");
       return toasts;
     default:
       return state;

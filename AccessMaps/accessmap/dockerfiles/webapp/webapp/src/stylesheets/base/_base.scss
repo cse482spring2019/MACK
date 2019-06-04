@@ -55,7 +55,7 @@ $md-light-theme-colors: (
   background: $md-light-theme-background-color,
   card: $md-light-theme-card-color,
   hover: $md-light-theme-divider-color,
-  toolbar: $md-light-theme-app-bar-color,
+  toolbar: $md-light-theme-app-bar-color
 );
 
 @include react-md-everything;

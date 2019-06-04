@@ -1,7 +1,6 @@
-exclude: 'stylesheets/vendor/**'
+exclude: "stylesheets/vendor/**"
 
 linters:
-
   BangFormat:
     enabled: true
     space_before_bang: true
@@ -137,7 +136,7 @@ linters:
 
   SelectorFormat:
     enabled: true
-    convention: 'hyphenated_BEM'
+    convention: "hyphenated_BEM"
 
   Shorthand:
     enabled: true

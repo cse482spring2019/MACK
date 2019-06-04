@@ -9,6 +9,6 @@ it's becoming hard to organize 'settings' vs 'map legend' vs 'routing'
 
 ## Color maps
 
-The color maps based on CSS use gradients that *do not* match the current color maps.
+The color maps based on CSS use gradients that _do not_ match the current color maps.
 They show a simple linear interpolation, when they should estimate our estimated speed
 function.
