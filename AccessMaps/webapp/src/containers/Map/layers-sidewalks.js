@@ -28,7 +28,13 @@ const WIDTH_INACCESSIBLE = 1;
 const DASH_INACCESSIBLE = [WIDTH_INACCESSIBLE * 4, WIDTH_INACCESSIBLE * 1.5];
 
 const Sidewalks = props => {
-  const { uphillMax, downhillMax, speed, inclineUphill } = props;
+  const {
+    uphillMax,
+    downhillMax,
+    speed,
+    inclineUphill,
+    blacklistedIds
+  } = props;
 
   // Pick an odd number so that equal amount on each side of 0
   const nSamples = 15;
@@ -80,6 +86,14 @@ const Sidewalks = props => {
     [">", ["to-number", ["get", "incline"]], boundMax],
     false,
     ["<", ["to-number", ["get", "incline"]], boundMin],
+    false,
+    [inBlacklistedExpression],
+    false,
+    true
+  ];
+
+  const inBlacklistedExpression = [
+    "case"[("in", "$id", blacklistedIds)],
     false,
     true
   ];
@@ -261,11 +275,13 @@ Sidewalks.propTypes = {
   uphillMax: PropTypes.number.isRequired,
   downhillMax: PropTypes.number.isRequired,
   inclineUphill: PropTypes.bool,
-  speed: PropTypes.number.isRequired
+  speed: PropTypes.number.isRequired,
+  blacklistedIds: PropTypes.array
 };
 
 Sidewalks.defaultProps = {
-  inclineUphill: true
+  inclineUphill: true,
+  blacklistedIds: null
 };
 
 const mapStateToProps = state => {
@@ -277,7 +293,8 @@ const mapStateToProps = state => {
     uphillMax: currentProfile.uphillMax,
     downhillMax: currentProfile.downhillMax,
     speed: currentProfile.speed,
-    inclineUphill: map.inclineUphill
+    inclineUphill: map.inclineUphill,
+    blacklistedIds: state.route.blacklistedIds
   };
 };
 

@@ -60,7 +60,8 @@ export const defaultToasts = [];
 export const defaultRoute = {
   fetchingRoute: false,
   routeResult: null,
-  blacklistedEdges: null
+  blacklistedEdges: null,
+  blacklistedIds: null
 };
 
 export const defaultRouteSettings = {

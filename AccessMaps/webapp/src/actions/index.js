@@ -29,6 +29,7 @@ export const CLOSE_REGION_SELECTIONS = "CLOSE_REGION_SELECTIONS";
 // Rerouting and alternate routes around obstacle
 export const VIEW_ALTERNATE_ROUTE = "VIEW_ALTERNATE_ROUTE";
 export const SET_OBSTACLE = "SET_OBSTACLE";
+export const SET_OBSTACLE_ID = "SET_OBSTACLE_ID";
 export const CONFIRM_OBSTACLE_LOCATION = "CONFIRM_OBSTACLE_LOCATION";
 
 // Routing profile settings
@@ -728,6 +729,16 @@ export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
     newPayload.push(closestEdge);
   }
 
+  var idPayload = null;
+  if (state.route.blacklistedIds != null) {
+    var oldBLIds = Object.assign([], state.route.blacklistedIds);
+    oldBLIds.push(closestEdge.id);
+    idPayload = oldBLIds;
+  } else {
+    idPayload = [];
+    idPayload.push(closestEdge.id);
+  }
+
   dispatch({
     type: SET_OBSTACLE,
     payload: newPayload,
@@ -735,6 +746,17 @@ export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
       analytics: {
         type: "set-obstacle",
         payload: { lon, lat, name }
+      }
+    }
+  });
+
+  dispatch({
+    type: SET_OBSTACLE_ID,
+    payload: idPayload, //change the payload
+    meta: {
+      analytics: {
+        type: "set-obstacle-id",
+        payload: { featureID }
       }
     }
   });

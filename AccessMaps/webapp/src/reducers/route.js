@@ -19,6 +19,15 @@ const handleSettingObstacle = (state = defaults.blacklistedEdges, action) => {
   }
 };
 
+const handleSettingObstacleIds = (state = defaults.blacklistedIds, action) => {
+  switch (action.type) {
+    case SET_OBSTACLE:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 const handleRoute = (state = defaults.routeResult, action) => {
   switch (action.type) {
     case RECEIVE_ROUTE:
