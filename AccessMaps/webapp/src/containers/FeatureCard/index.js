@@ -130,7 +130,7 @@ const FeatureCard = props => {
     cardToUse = (
       <CardActions>
         <Button
-          flat
+          raised
           primary
           onClick={() => {
             actions.setObstacle(
@@ -200,8 +200,8 @@ const FeatureCard = props => {
           Route to here
         </Button>
         <Button
-          flat
-          primary
+          raised
+          secondary
           onClick={() => {
             // actions.setObstacle(
             //   selectedFeature.location[0],
