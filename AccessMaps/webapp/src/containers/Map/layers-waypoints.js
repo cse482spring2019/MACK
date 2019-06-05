@@ -23,15 +23,16 @@ const Waypoints = props => {
     );
   }
 
-  let obstacleComponent = null;
-  if (obstacle) {
-    obstacleComponent = (
-      <MapMarker coordinates={obstacle.geometry.coordinates} label="!" />
-    );
-  }
+  /*
+  If there is an origin and destination, we know to display our custom
+  waypoint marker "!" to indicates a point of interest that has an obstruction.
+  otherwise, we just use the blank waypoint marker for routing.
+  */
 
   let poiComponent = null;
-  if (selectedFeature) {
+  if (selectedFeature && (origin == null || destination == null)) {
+    poiComponent = <MapMarker coordinates={selectedFeature.location} />;
+  } else if (selectedFeature && origin != null && destination != null) {
     poiComponent = (
       <MapMarker coordinates={selectedFeature.location} label="!" />
     );
@@ -44,7 +45,6 @@ const Waypoints = props => {
       {originComponent}
       {destinationComponent}
       {poiComponent}
-      {obstacleComponent}
     </React.Fragment>
   );
 };
