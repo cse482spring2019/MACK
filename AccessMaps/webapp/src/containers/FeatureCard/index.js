@@ -108,7 +108,7 @@ const FeatureCard = props => {
     cardToUse = (
       <CardActions>
         <Button
-          flat
+          raised
           primary
           onClick={() => {
             actions.clearSelectedFeatures();
