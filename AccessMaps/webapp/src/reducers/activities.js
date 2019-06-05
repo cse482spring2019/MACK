@@ -33,6 +33,8 @@ const handleConfirmingObstacleLocation = (
       return true;
     case CLEAR_SELECTED_FEATURES:
       return false;
+    case CLOSE_DIRECTIONS:
+      return false;
     default:
       return state;
   }
