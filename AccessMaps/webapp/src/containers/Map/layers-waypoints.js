@@ -34,7 +34,11 @@ const Waypoints = props => {
     poiComponent = <MapMarker coordinates={selectedFeature.location} />;
   } else if (selectedFeature && origin != null && destination != null) {
     poiComponent = (
-      <MapMarker coordinates={selectedFeature.location} label="!" />
+      <MapMarker
+        className="map-marker obstacle-icon"
+        coordinates={selectedFeature.location}
+        label="!"
+      />
     );
   } else if (poi) {
     poiComponent = <MapMarker coordinates={poi.geometry.coordinates} />;
