@@ -734,7 +734,7 @@ export const setObstacle = (lon, lat, name) => (dispatch, getState) => {
     meta: {
       analytics: {
         type: "set-obstacle",
-        payload: { lon, lat, name }
+        payload: { newPayload }
       }
     }
   });

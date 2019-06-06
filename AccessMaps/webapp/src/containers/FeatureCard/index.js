@@ -122,45 +122,7 @@ const FeatureCard = props => {
             );
           }}
         >
-          Confirm Obstacle Report
-        </Button>
-      </CardActions>
-    );
-  } else if (viewingAlternate) {
-    cardToUse = (
-      <CardActions>
-        <Button
-          raised
-          primary
-          onClick={() => {
-            actions.setObstacle(
-              selectedFeature.location[0],
-              selectedFeature.location[1],
-              [
-                selectedFeature.location[1].toFixed(6),
-                selectedFeature.location[0].toFixed(6)
-              ].join(", ")
-            );
-          }}
-        >
-          Report Obstacle
-        </Button>
-        {/* TODO: REMOVE OR LEAVE for demo?*/}
-        <Button
-          flat
-          primary
-          onClick={() => {
-            actions.setOrigin(
-              selectedFeature.location[0],
-              selectedFeature.location[1],
-              [
-                selectedFeature.location[1].toFixed(6),
-                selectedFeature.location[0].toFixed(6)
-              ].join(", ")
-            );
-          }}
-        >
-          Set new origin
+          Confirm Obstacle
         </Button>
       </CardActions>
     );
@@ -203,14 +165,6 @@ const FeatureCard = props => {
           raised
           secondary
           onClick={() => {
-            // actions.setObstacle(
-            //   selectedFeature.location[0],
-            //   selectedFeature.location[1],
-            //   [
-            //     selectedFeature.location[1].toFixed(6),
-            //     selectedFeature.location[0].toFixed(6)
-            //   ].join(", ")
-            // );
             actions.confirmingObstacleLocation();
           }}
         >
@@ -220,55 +174,81 @@ const FeatureCard = props => {
     );
   }
 
-  return (
-    <Card className="feature-card md-cell md-cell--4">
-      <Toolbar
-        title={title}
-        actions={
-          <Button
-            aria-label="Close point of interest popup"
-            icon
-            svg
-            onClick={actions.clearSelectedFeatures}
-          >
-            <SVGIcon use={close.url} />
-          </Button>
-        }
-      />
-      <DataTable className="feature-card-body" plain>
-        <TableBody>
-          {description !== undefined ? (
-            <ContentRow label="Description" content={description} />
-          ) : null}
-          {opening_hours !== undefined ? (
-            <ContentRow
-              label="Open Hours"
-              content={<OpeningHoursTable openingHours={opening_hours} />}
-            />
-          ) : null}
-          {curbramps !== undefined ? (
-            <ContentRow label="Curbramps" content={curbramps ? "Yes" : "No"} />
-          ) : null}
-          {markedCrossing ? (
-            <ContentRow label="Marked crosswalk" content={markedCrossing} />
-          ) : null}
-          {incline !== undefined ? (
-            <ContentRow
-              label="Incline"
-              content={`${Math.abs((incline * 100).toFixed(1))}%`}
-            />
-          ) : null}
-          {surface !== undefined ? (
-            <ContentRow label="Surface" content={SURFACE_MAP[surface]} />
-          ) : null}
-          {indoor !== undefined ? (
-            <ContentRow label="Indoor" content={indoor ? "Yes" : "No"} />
-          ) : null}
-        </TableBody>
-      </DataTable>
-      {cardToUse}
-    </Card>
-  );
+  // If in viewing alternate route mode, use this card instead of the regular
+  if (viewingAlternate) {
+    return (
+      <Card className="feature-card md-cell md-cell--6">
+        <Toolbar
+          title="Confirm street:"
+          subtitle={title}
+          actions={
+            <Button
+              aria-label="Close point of interest popup"
+              icon
+              svg
+              onClick={actions.clearSelectedFeatures}
+            >
+              <SVGIcon use={close.url} />
+            </Button>
+          }
+        />
+        {cardToUse}
+      </Card>
+    );
+  } else {
+    return (
+      <Card className="feature-card md-cell md-cell--4">
+        <Toolbar
+          title={title}
+          actions={
+            <Button
+              aria-label="Close point of interest popup"
+              icon
+              svg
+              onClick={actions.clearSelectedFeatures}
+            >
+              <SVGIcon use={close.url} />
+            </Button>
+          }
+        />
+        <DataTable className="feature-card-body" plain>
+          <TableBody>
+            {description !== undefined ? (
+              <ContentRow label="Description" content={description} />
+            ) : null}
+            {opening_hours !== undefined ? (
+              <ContentRow
+                label="Open Hours"
+                content={<OpeningHoursTable openingHours={opening_hours} />}
+              />
+            ) : null}
+            {curbramps !== undefined ? (
+              <ContentRow
+                label="Curbramps"
+                content={curbramps ? "Yes" : "No"}
+              />
+            ) : null}
+            {markedCrossing ? (
+              <ContentRow label="Marked crosswalk" content={markedCrossing} />
+            ) : null}
+            {incline !== undefined ? (
+              <ContentRow
+                label="Incline"
+                content={`${Math.abs((incline * 100).toFixed(1))}%`}
+              />
+            ) : null}
+            {surface !== undefined ? (
+              <ContentRow label="Surface" content={SURFACE_MAP[surface]} />
+            ) : null}
+            {indoor !== undefined ? (
+              <ContentRow label="Indoor" content={indoor ? "Yes" : "No"} />
+            ) : null}
+          </TableBody>
+        </DataTable>
+        {cardToUse}
+      </Card>
+    );
+  }
 };
 
 FeatureCard.propTypes = {
