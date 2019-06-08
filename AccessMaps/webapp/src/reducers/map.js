@@ -9,6 +9,7 @@ import {
   SET_ORIGIN,
   SET_ORIGIN_DESTINATION,
   SET_OBSTACLE,
+  SET_OBSTACLE_ID,
   MAP_CLICK,
   MOUSE_OVER_DOWNHILL,
   MOUSE_OUT_DOWNHILL,
@@ -101,6 +102,7 @@ const handleSelectedFeature = (state = defaultMap.selectedFeature, action) => {
     case SET_ORIGIN:
     case SET_DESTINATION:
     case SET_OBSTACLE:
+    case SET_OBSTACLE_ID:
     case SET_ORIGIN_DESTINATION:
       return null;
     default:

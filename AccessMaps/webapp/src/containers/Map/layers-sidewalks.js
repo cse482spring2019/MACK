@@ -87,26 +87,25 @@ const Sidewalks = props => {
     false,
     ["<", ["to-number", ["get", "incline"]], boundMin],
     false,
-    [inBlacklistedExpression],
-    false,
+    //["==", ["get", "id"], blacklistedIds],
+    //false,
     true
   ];
 
-  const inBlacklistedExpression = [
-    "case"[("in", "$id", blacklistedIds)],
-    false,
-    true
-  ];
+  //  const inBlacklistedExpression = [false];
 
   const accessibleSidewalkExpression = [
     "all",
     isSidewalkExpression,
     accessibleExpression
+    //["!", inBlacklistedExpression]
   ];
+
   const inaccessibleSidewalkExpression = [
     "all",
     isSidewalkExpression,
     ["!", accessibleExpression]
+    //  inBlacklistedExpression
   ];
 
   return (
