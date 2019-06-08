@@ -9,7 +9,6 @@ import {
   SET_DESTINATION,
   SET_POI,
   SET_ORIGIN_DESTINATION,
-  SET_OBSTACLE,
   SWAP_WAYPOINTS
 } from "actions";
 
@@ -42,12 +41,7 @@ const handleWaypoints = (state = defaults, action) => {
         destination: action.payload,
         poi: null
       };
-    case SET_OBSTACLE:
-      return {
-        ...state,
-        obstacle: action.payload.poi,
-        poi: null
-      };
+
     case SET_ORIGIN_DESTINATION:
       return {
         ...state,

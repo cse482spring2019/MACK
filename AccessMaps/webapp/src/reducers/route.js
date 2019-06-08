@@ -5,7 +5,8 @@ import {
   FAILED_ROUTE,
   RECEIVE_ROUTE,
   REQUEST_ROUTE,
-  SET_OBSTACLE
+  SET_OBSTACLE,
+  SET_OBSTACLE_ID
 } from "actions";
 
 import { defaultRoute as defaults } from "reducers/defaults";
@@ -13,6 +14,15 @@ import { defaultRoute as defaults } from "reducers/defaults";
 const handleSettingObstacle = (state = defaults.blacklistedEdges, action) => {
   switch (action.type) {
     case SET_OBSTACLE:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+const handleSettingObstacleIds = (state = defaults.blacklistedIds, action) => {
+  switch (action.type) {
+    case SET_OBSTACLE_ID:
       return action.payload;
     default:
       return state;
@@ -48,5 +58,6 @@ const handleFetchingRoute = (state = defaults.fetchingRoute, action) => {
 export default combineReducers({
   fetchingRoute: handleFetchingRoute,
   routeResult: handleRoute,
-  blacklistedEdges: handleSettingObstacle
+  blacklistedEdges: handleSettingObstacle,
+  blacklistedIds: handleSettingObstacleIds
 });
