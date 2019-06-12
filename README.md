@@ -33,11 +33,17 @@ After that, make the `deploy_dev.sh` script executable with: `chmod u+x deploy_d
 and then use
 `./deploy_dev.sh` to run the script that will build the docker containers. Using the `deploy_dev.sh` script will eliminate the need to remember the `docker-compose` build instructions.
 
+NOTE: this script will take a while to complete.
+
+After running `./deploy_dev.sh`, the webapp and servers should be running as a docker container at `localhost:2015`.
+
+## Development
+
 In the `/webapps/` directory on a version of npm 6.1.0+, and node 10.7.0+,
 
 Run `docker-compose up` in `AccessMaps/accessmap` to start the docker aggregation of container outputs.
 
-While running `docker-compose up`, run `npm start` in a new window in the `AccessMaps/webapps` directory to deploy the web app.
+While running `docker-compose up`, run `npm start` or `yarn start` in a new tab in the `AccessMaps/webapps` directory to deploy the web app.
 
 We're currently using yarn for our package manager, so if an error relating to `webpack-cli` appears, run `yarn add -D webpack-cli` in the `/webapp/` directory.
 
