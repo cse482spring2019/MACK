@@ -35,7 +35,7 @@ and then use
 
 NOTE: this script will take a while to complete.
 
-After running `./deploy_dev.sh`, the webapp and servers should be running as a docker container at `localhost:2015`.
+After running `./deploy_dev.sh`, the webapp and servers will be running as a docker container at `localhost:2015`.
 
 ## Development
 
@@ -46,6 +46,14 @@ Run `docker-compose up` in `AccessMaps/accessmap` to start the docker aggregatio
 While running `docker-compose up`, run `npm start` or `yarn start` in a new tab in the `AccessMaps/webapps` directory to deploy the web app.
 
 We're currently using yarn for our package manager, so if an error relating to `webpack-cli` appears, run `yarn add -D webpack-cli` in the `/webapp/` directory.
+
+## Usage
+
+Usage of our rerouting feature consists of using the routing feature on AccessMap, and then selecting a point on or near your route where an obstruction has appeared. 
+
+After selecting an origin and destination, any tap or click onto the map will result in a waypoint marker with an exclaimation mark. This marker represents the location of the obstacle.
+
+Press 'Report Obstacle' and confirm the location of the selected obstacle with the description of the feature in the card. After confirming, a new route will be given calculated around the blacklisted location.
 
 ## About
 
