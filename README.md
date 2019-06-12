@@ -50,18 +50,24 @@ We're currently using yarn for our package manager, so if an error relating to `
 ## Usage
 
 Usage of our rerouting feature consists of using the routing feature on AccessMap, and then selecting a point on or near your route where an obstruction has appeared.
-
-<img src="selecting-origin.png" alt="Select origin on AccessMaps" height="800"/>
-<img src="route-from-a-to-b.png" alt="Viewing route from origin to destination" height="800"/>
+<div style="text-align: center;">
+<img src="selecting-origin.png" alt="Select origin on AccessMaps" height="400"/>  <img src="route-from-a-to-b.png" alt="Viewing route from origin to destination" height="400"/>
+</div>
 
 After selecting an origin and destination, any tap or click onto the map will result in a waypoint marker with an exclaimation mark. This marker represents the location of the obstacle.
 
-<img src="selecting-obstacle.png" alt="Selecting obstacle location with custom marker" height="800"/>
+<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+<img src="selecting-obstacle.png" alt="Selecting obstacle location with custom marker" height="400"/>
+</div>
 
 Press 'Report Obstacle' and confirm the location of the selected obstacle with the description of the feature in the card. After confirming, a new route will be given calculated around the blacklisted location.
 
-<img src="confirming-location.png" alt="Confirm selected obstacle location screen" height="800"/>
-<img src="rerouted-route.png" alt="New route around obstacle presented" height="800"/>
+<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+<img src="confirming-location.png" alt="Confirm selected obstacle location screen" height="400"/> <img src="rerouted-route.png" alt="New route around obstacle presented" height="400"/>
+</div>
+
+Note: at times, rerouting fails to provide a new route around the obstacle. Selecting features around that obstacle (close streets, close crosswalks) will provide additional attempts at getting a new route.
+
 ## About
 
 Built on top of https://www.accessmap.io/, we aim to provide a rerouting feature that will assist users with navigating around obstacles they face in the Seattle area.
