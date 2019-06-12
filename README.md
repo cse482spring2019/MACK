@@ -51,19 +51,19 @@ We're currently using yarn for our package manager, so if an error relating to `
 
 Usage of our rerouting feature consists of using the routing feature on AccessMap, and then selecting a point on or near your route where an obstruction has appeared.
 <p align="center">
-<img src="selecting-origin.png" alt="Select origin on AccessMaps" height="400"/>  <img src="route-from-a-to-b.png" alt="Viewing route from origin to destination" height="400"/>
+<img src="selecting-origin.png" alt="Select origin on AccessMaps" height="500"/>  <img src="route-from-a-to-b.png" alt="Viewing route from origin to destination" height="500"/>
 </p>
 
 After selecting an origin and destination, any tap or click onto the map will result in a waypoint marker with an exclaimation mark. This marker represents the location of the obstacle.
 
 <p align="center">
-<img src="selecting-obstacle.png" alt="Selecting obstacle location with custom marker" align="center" height="400"/>
+<img src="selecting-obstacle.png" alt="Selecting obstacle location with custom marker" align="center" height="500"/>
 </p>
 
 Press 'Report Obstacle' and confirm the location of the selected obstacle with the description of the feature in the card. After confirming, a new route will be given calculated around the blacklisted location.
 
 <p align="center">
-<img src="confirming-location.png" alt="Confirm selected obstacle location screen" height="400"/> <img src="rerouted-route.png" alt="New route around obstacle presented" height="400"/>
+<img src="confirming-location.png" alt="Confirm selected obstacle location screen" height="500"/> <img src="rerouted-route.png" alt="New route around obstacle presented" height="500"/>
 </p>
 
 Note: at times, rerouting fails to provide a new route around the obstacle. Selecting features around that obstacle (close streets, close crosswalks) will provide additional attempts at getting a new route.
