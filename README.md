@@ -18,7 +18,7 @@ on the command line, or by downloading the .ZIP folder with the github webpage.
 
 Next, set your environment variables in a `.env` file in `/AccessMaps/accessmap` to be hosted at localhost, as such in the file set:
 
-`HOST=localhost`, and also entering your `OSM_CLIENT_ID=...`, `OSM_CLIENT_SECRET=...`, as well as your `MAPBOX_TOKEN=...`. These will be obtained from signing up for an Open Street Maps contributer account as well as a Mapbox account respectively. For more information on how to obtain these keys, please see the README in `https://github.com/AccessMap/accessmap-orchestration` under the section `Enviroment Variables`
+`HOST=localhost`, `DEV_HOST=localhost`, and `STAGING_HOST=localhost`. See the `.env.sample` for the format. Also enter your `OSM_CLIENT_ID=...`, `OSM_CLIENT_SECRET=...`, as well as your `MAPBOX_TOKEN=...`. You must also input prefixed versions of these secrets e.g. `DEV_OSM_CLIENT_ID=...`. Set `ANALYTICS=no`. These will be obtained from signing up for an Open Street Maps contributer account as well as a Mapbox account respectively. For more information on how to obtain these keys, please see the README in `https://github.com/AccessMap/accessmap-orchestration` under the section `Enviroment Variables`
 
 Then, add environment variables found in the `.env` file in `AccessMaps/webapps` with:
 
