@@ -16,9 +16,9 @@ on the command line, or by downloading the .ZIP folder with the github webpage.
 
 Next, set your environment variables in the `.env` file in `/AccessMaps/accessmap` to be hosted at localhost, as such:
 
-`HOST=localhost`, and also entering your `OSM_CLIENT_ID=...`, `OSM_CLIENT_SECRET=...`, as well as your `MAPBOX_TOKEN=...`.
+`HOST=localhost`, and also entering your `OSM_CLIENT_ID=...`, `OSM_CLIENT_SECRET=...`, as well as your `MAPBOX_TOKEN=...`. For more information on how to enter these keys, please see the README in `https://github.com/AccessMap/accessmap-orchestration` under the section `Enviroment Variables`
 
-Then, set the environment variables found in the `.env` file in `AccessMaps/webapps` with:
+Then, add the environment variables found in the `.env` file in `AccessMaps/webapps` with:
 
 ```
   API_SERVER=http://localhost:2015/api/v1

@@ -1,7 +1,0 @@
-MAPBOX_TOKEN=pk.eyJ1Ijoia2VuZG9uZyIsImEiOiJjanZmcXMyc2EyeDU3NDRtZTFqYWpra3IwIn0.ncnJGf_a4F1VbtJUVzlmew
-API_SERVER=http://localhost:2015/api/v1
-ROUTING_SERVER=http://localhost:2015/api/v1/routing
-TILE_SERVER=http://localhost:2015/tiles
-ANALYTICS=no
-ANALYTICS_SERVER=
-ANALYTICS_KEY=
