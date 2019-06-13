@@ -28,6 +28,8 @@ Then, add the environment variables found in the `.env` file in `AccessMaps/weba
   TILE_SERVER=http://localhost:2015/tiles
 ```
 
+A working `.env` file is distributed on our Canvas submission.
+
 So that we are able to get the api server for users, routing server for generating routes, and the tiles server for using OpenStreetMaps data to build our map.
 
 After that, make the `deploy_dev.sh` script executable with: `chmod u+x deploy_dev.sh`,
