@@ -20,7 +20,7 @@ Next, set your environment variables in the `.env` file in `/AccessMaps/accessma
 
 `HOST=localhost`, and also entering your `OSM_CLIENT_ID=...`, `OSM_CLIENT_SECRET=...`, as well as your `MAPBOX_TOKEN=...`. For more information on how to enter these keys, please see the README in `https://github.com/AccessMap/accessmap-orchestration` under the section `Enviroment Variables`
 
-Then, add the environment variables found in the `.env` file in `AccessMaps/webapps` with:
+Then, add environment variables found in the `.env` file in `AccessMaps/webapps` with:
 
 ```
   API_SERVER=http://localhost:2015/api/v1
@@ -32,10 +32,7 @@ A working `.env` file is distributed on our Canvas submission.
 
 So that we are able to get the api server for users, routing server for generating routes, and the tiles server for using OpenStreetMaps data to build our map.
 
-After that, make the `deploy_dev.sh` script executable with: `chmod u+x deploy_dev.sh`,
-
-and then use
-`./deploy_dev.sh` to run the script that will build the docker containers. Using the `deploy_dev.sh` script will eliminate the need to remember the `docker-compose` build instructions.
+After that, make the `deploy_dev.sh` (in `/AccessMaps/accessmap`) script executable with: `chmod u+x deploy_dev.sh`,and then use `./deploy_dev.sh` to run the script that will build the docker containers. Using the `deploy_dev.sh` script will eliminate the need to remember the `docker-compose` build instructions.
 
 NOTE: this script will take a while to complete.
 
