@@ -8,4 +8,6 @@ COPY . /www/
 
 RUN if [ -d node_modules ]; then rm -r node_modules; fi
 
+RUN npm install
+
 RUN npm ci
