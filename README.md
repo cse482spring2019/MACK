@@ -6,6 +6,8 @@ An AccessMaps feature that provides a rerouting service around obstacles that us
 
 These instructions will get you a copy of the project running on your local machine for development and testing.
 
+First make sure you have `docker-compose` version `1.24.0` installed (higher versions will likely work). Further make sure you have `docker` version `18.09.5` installed (higher versions will likely work). These two applications are all you need for the next steps.
+
 ## Installing
 
 First, clone the repository to your local machine, using:
