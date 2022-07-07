@@ -85,7 +85,7 @@
     "lodash.throttle": "^4.1.1",
     "mapbox": "^1.0.0-beta9",
     "mapbox-gl": "^0.52.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "normalize.css": "^8.0.1",
     "opening_hours": "^3.5.0",
     "promise-polyfill": "^8.1.0",
